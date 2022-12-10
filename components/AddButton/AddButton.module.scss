@@ -1,0 +1,32 @@
+@import "styles/config.scss";
+
+.container {
+  width: 90%;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 1rem;
+}
+
+.button {
+  border: none;
+  width: 100%;
+  padding: 0.75rem 2rem;
+  color: $primaryColor;
+  outline: transparent;
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid transparent;
+
+  cursor: pointer;
+  transition: border-color 100ms ease-in-out;
+
+  & > img {
+    margin-right: 1.25rem;
+  }
+
+  &:hover {
+    border: 1px solid $primaryColor;
+  }
+}
