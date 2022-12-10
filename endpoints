@@ -1,0 +1,6 @@
+POST - /login - login/password
+POST - /register - login/password/name
+GET - /task?finishPrevisionDateStart=&finishPrevisionDateEnd=&status= - id/name/finishPrevisionDate/finishDate
+POST - /task - name/finishPrevisionDate
+PUT - /task?id= - name/finishPrevisionDate/finishDate
+DELETE - /task?id=
