@@ -1,0 +1,25 @@
+@import "styles/config.scss";
+
+.inputgroup {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+
+  & img {
+    margin-right: 0.5rem;
+  }
+}
+
+.input {
+  outline: transparent;
+  color: $primaryColor;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid $secondaryColor;
+
+  &:focus,
+  &:active {
+    border-bottom: 1px solid $primaryColor;
+  }
+}

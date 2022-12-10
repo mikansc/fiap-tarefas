@@ -1,0 +1,14 @@
+@import "styles/config.scss";
+
+.button {
+  color: white;
+  font-family: "Biennale Regular";
+
+  width: 100%;
+  padding: 1em;
+
+  background-color: $primaryColor;
+
+  border: none;
+  border-radius: 12px;
+}
