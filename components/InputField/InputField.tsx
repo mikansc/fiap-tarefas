@@ -5,7 +5,7 @@ import { InputHTMLAttributes } from "react";
 import styles from "./InputField.module.scss";
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 export const InputField = forwardRef((props: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {

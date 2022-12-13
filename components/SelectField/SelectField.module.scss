@@ -1,0 +1,20 @@
+@import "styles/config.scss";
+
+.input {
+  width: 100%;
+  min-width: 120px;
+  outline: transparent;
+  color: $primaryColor;
+  width: 100%;
+  border: 1px solid $secondaryColor;
+  background-color: transparent;
+
+  padding: 0.5rem;
+  border-radius: 12px;
+  border-color: $primaryColor;
+
+  &:focus,
+  &:active {
+    border-bottom: 1px solid $primaryColor;
+  }
+}
