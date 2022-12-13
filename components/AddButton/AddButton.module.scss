@@ -7,6 +7,14 @@
   align-items: center;
   position: absolute;
   bottom: 1rem;
+
+  @media screen and (min-width: $mediaQueryDesktop) {
+    width: 280px;
+    bottom: initial;
+    top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .button {
@@ -20,13 +28,29 @@
   border: 1px solid transparent;
 
   cursor: pointer;
-  transition: border-color 100ms ease-in-out;
+  transition: border-color 100ms ease-in-out, background-color 150ms ease-in-out;
 
-  & > img {
+  & > svg {
     margin-right: 1.25rem;
+    fill: #ed1164;
+    @media screen and (min-width: $mediaQueryDesktop) {
+      fill: white;
+    }
   }
 
   &:hover {
     border: 1px solid $primaryColor;
+  }
+
+  @media screen and (min-width: $mediaQueryDesktop) {
+    background-color: rgb(126, 126, 126);
+    color: white;
+    padding: 0.5rem 2rem;
+
+    &:hover {
+      background-color: $primaryColor;
+      border: 1px solid $primaryColor;
+      color: white;
+    }
   }
 }
