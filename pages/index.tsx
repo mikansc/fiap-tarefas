@@ -1,5 +1,8 @@
-import { Login, Home } from "containers";
+import { useAuth } from "contexts/authContext";
+
+import { Home, Login } from "containers";
 
 export default function Homepage() {
-  return <Home />;
+  const { isLoggedIn } = useAuth();
+  return isLoggedIn ? <Home /> : <Login />;
 }
