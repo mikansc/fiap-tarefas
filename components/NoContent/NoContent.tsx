@@ -4,9 +4,9 @@ import styles from "./NoContent.module.scss";
 
 export const NoContent = () => {
   return (
-    <>
+    <div className={styles.container}>
       <Image src={NoContentImage} alt="No content found" />
-      <p className={styles.message}>Você ainda não possui tarefas cadastradas!</p>
-    </>
+      <span className={styles.message}>Você ainda não possui tarefas cadastradas!</span>
+    </div>
   );
 };

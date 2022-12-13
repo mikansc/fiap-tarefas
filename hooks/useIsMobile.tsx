@@ -4,7 +4,7 @@ export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const resizeListener = useCallback(() => {
-    setIsMobile(window.matchMedia(`(max-width: 1048px`).matches);
+    setIsMobile(window.matchMedia(`(max-width: 954px`).matches);
   }, []);
 
   useEffect(() => {
