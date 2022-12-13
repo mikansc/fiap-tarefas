@@ -3,5 +3,5 @@ export type Task = {
   userId: string;
   name: string;
   finishPrevisionDate: string;
-  finishDate: string;
+  finishDate?: string;
 };

@@ -1,0 +1,38 @@
+@import "styles/config.scss";
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: $lighterGreyColor;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.taskAction {
+  border: none;
+  background-color: transparent;
+  margin-right: 2rem;
+}
+
+.taskContent {
+  flex-grow: 1;
+}
+
+.taskTitle {
+  color: $darkGreyColor;
+  display: block;
+  font-size: 14px;
+}
+
+.taskDone {
+  text-decoration: line-through;
+}
+
+.taskDue {
+  color: $darkGreyColor;
+  display: block;
+  font-size: 12px;
+}

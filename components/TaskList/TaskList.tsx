@@ -1,7 +1,17 @@
+import { Task } from "types/Task";
+import { TaskItem } from "./TaskItem";
 import styles from "./TaskList.module.scss";
 
-interface TaskListProps {}
+interface TaskListProps {
+  tasks: Task[];
+}
 
-export const TaskList = (props: TaskListProps) => {
-  return <div>TaskList</div>;
+export const TaskList = ({ tasks }: TaskListProps) => {
+  return (
+    <div className={styles.container}>
+      {tasks.map((task) => (
+        <TaskItem key={task._id} task={task} />
+      ))}
+    </div>
+  );
 };
