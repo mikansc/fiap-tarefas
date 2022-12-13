@@ -11,7 +11,7 @@ export const NavBar = () => {
         <Image src="/images/logo.svg" width={90} height={24} alt="Logo" />
         <span className={styles.username}>
           Olá, {user.name}
-          <IconButton iconName="exit-icon" onClick={handleLogout} />
+          <IconButton iconName="exit" onClick={handleLogout} />
         </span>
       </div>
     </div>
