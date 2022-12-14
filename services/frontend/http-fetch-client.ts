@@ -5,9 +5,7 @@ export class HttpFetchClient {
   get(resource: string) {
     return fetch(this.url + resource, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: getHeaders(),
     }).then(handleResponse);
   }
 
