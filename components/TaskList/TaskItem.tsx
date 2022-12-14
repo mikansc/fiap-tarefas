@@ -9,14 +9,17 @@ function formatDate(date: string): string {
 
 interface TaskProps {
   task: Task;
+  onClick: () => void;
+  seleted: boolean;
 }
 
-export const TaskItem = ({ task }: TaskProps) => {
+export const TaskItem = ({ task, onClick, seleted }: TaskProps) => {
   const taskIsDone = !!task.finishDate;
+  console.log(seleted);
 
   return (
-    <div className={styles.container}>
-      <button className={styles.taskAction}>{taskIsDone ? <DoneIcon /> : <UndoneIcon />}</button>
+    <div className={`${styles.container} ${seleted ? styles.selected : ""}`} onClick={onClick}>
+      <div className={styles.taskAction}>{taskIsDone ? <DoneIcon /> : <UndoneIcon />}</div>
       <div className={styles.taskContent}>
         <span className={`${styles.taskTitle} ${taskIsDone ? styles.taskDone : ""}`}>{task.name}</span>
         {taskIsDone ? (

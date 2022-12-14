@@ -6,14 +6,43 @@
   justify-content: space-between;
   align-items: center;
 
-  background-color: $lighterGreyColor;
   padding: 1rem;
+  color: $darkGreyColor;
+
+  background-color: $lighterGreyColor;
+  border: 1px solid transparent;
   border-radius: 12px;
+
+  & svg > circle {
+    stroke: $darkGreyColor;
+    &.doneIcon {
+      fill: $darkGreyColor;
+    }
+  }
+
+  & svg > path {
+    stroke: white;
+  }
+
+  cursor: pointer;
+}
+
+.selected {
+  color: $primaryColor;
+  background-color: $lightPrimaryColor;
+  border: 1px solid $primaryColor;
+
+  & svg > circle {
+    stroke: $primaryColor;
+
+    &.doneIcon {
+      fill: $primaryColor;
+    }
+  }
 }
 
 .taskAction {
   border: none;
-  background-color: transparent;
   margin-right: 2rem;
 }
 
@@ -22,9 +51,9 @@
 }
 
 .taskTitle {
-  color: $darkGreyColor;
   display: block;
   font-size: 14px;
+  margin-bottom: 0.25rem;
 }
 
 .taskDone {
@@ -32,7 +61,6 @@
 }
 
 .taskDue {
-  color: $darkGreyColor;
   display: block;
   font-size: 12px;
 }
