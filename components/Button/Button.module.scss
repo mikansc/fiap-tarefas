@@ -1,14 +1,24 @@
 @import "styles/config.scss";
 
 .button {
-  color: white;
+  font-size: 14px;
   font-family: "Biennale Regular";
-
-  width: 100%;
   padding: 1em;
-
-  background-color: $primaryColor;
-
   border: none;
+  cursor: pointer;
+}
+.outlined {
+  color: white;
+  background-color: $primaryColor;
   border-radius: 12px;
+}
+
+.text {
+  color: $primaryColor;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.fullWidth {
+  width: 100%;
 }
