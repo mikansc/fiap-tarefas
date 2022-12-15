@@ -8,10 +8,6 @@
   justify-content: center;
   margin: 1rem 0;
 
-  & img {
-    margin-right: 0.5rem;
-  }
-
   & label {
     width: 100%;
     font-weight: bold;
@@ -26,13 +22,17 @@
     width: 100%;
     outline: transparent;
     color: $primaryColor;
-    padding: 0.75rem;
+
+    @media screen and (min-width: $mediaQueryDesktop) {
+      padding: 0.75rem;
+    }
   }
 
   &.default input,
   &.default select {
     border: none;
     border-bottom: 1px solid $secondaryColor;
+    padding-bottom: 0.25rem;
 
     &:focus,
     &:active {

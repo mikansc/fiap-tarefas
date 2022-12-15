@@ -18,8 +18,10 @@ export const InputField = forwardRef((props: InputFieldProps, ref: ForwardedRef<
   return (
     <InputWrapper fullWidth={fullWidth} variant={variant}>
       {label && <label htmlFor={id}>{label}</label>}
-      {!!icon && icon}
-      <input {...rest} id={id} ref={ref} />
+      <div className={styles.textfield}>
+        {!!icon && icon}
+        <input {...rest} id={id} ref={ref} />
+      </div>
     </InputWrapper>
   );
 });
