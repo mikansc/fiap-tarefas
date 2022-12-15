@@ -5,6 +5,7 @@ export * from "./EditTaskModal";
 export * from "./Filter";
 export * from "./FooterBar";
 export * from "./InputField";
+export * from "./InputWrapper";
 export * from "./ModalWrapper";
 export * from "./NavBar";
 export * from "./NoContent";

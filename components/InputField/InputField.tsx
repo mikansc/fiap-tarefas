@@ -1,3 +1,4 @@
+import { InputWrapper } from "components";
 import { forwardRef } from "react";
 import { ForwardedRef } from "react";
 import { InputHTMLAttributes } from "react";
@@ -8,14 +9,18 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;
   fullWidth?: boolean;
   variant?: "default" | "outlined";
+  label?: string;
 }
 
-export const InputField = forwardRef(({ icon, fullWidth, variant = "default", ...rest }: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
+export const InputField = forwardRef((props: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
+  const { icon, fullWidth = false, label, variant = "default", id, ...rest } = props;
+
   return (
-    <div className={styles.inputgroup}>
+    <InputWrapper fullWidth={fullWidth} variant={variant}>
+      {label && <label htmlFor={id}>{label}</label>}
       {!!icon && icon}
-      <input {...rest} className={`${styles.input} ${styles[variant]} ${fullWidth ? styles.fullWidth : ""}`} ref={ref} />
-    </div>
+      <input {...rest} id={id} ref={ref} />
+    </InputWrapper>
   );
 });
 

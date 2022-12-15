@@ -1,0 +1,57 @@
+@import "styles/config.scss";
+
+.inputgroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+
+  & img {
+    margin-right: 0.5rem;
+  }
+
+  & label {
+    width: 100%;
+    font-weight: bold;
+    color: $primaryColor;
+    font-size: 12px;
+    margin-left: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  & input,
+  & select {
+    width: 100%;
+    outline: transparent;
+    color: $primaryColor;
+    padding: 0.75rem;
+  }
+
+  &.default input,
+  &.default select {
+    border: none;
+    border-bottom: 1px solid $secondaryColor;
+
+    &:focus,
+    &:active {
+      border-bottom: 1px solid $primaryColor;
+    }
+  }
+
+  &.outlined input,
+  &.outlined select {
+    min-width: 120px;
+    max-width: 180px;
+    background-color: transparent;
+    border: 1px solid $secondaryColor;
+    border-radius: 12px;
+    border-color: $primaryColor;
+  }
+
+  &.fullWidth input,
+  &.fullWidth select {
+    max-width: 100%;
+  }
+}

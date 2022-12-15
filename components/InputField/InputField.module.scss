@@ -1,44 +1,5 @@
-@import "styles/config.scss";
-
-.inputgroup {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin: 1rem 0;
-
+.textfield {
   & img {
     margin-right: 0.5rem;
   }
-}
-
-.input {
-  width: 100%;
-  outline: transparent;
-  color: $primaryColor;
-  padding: 0.75rem;
-}
-
-.default {
-  border: none;
-  border-bottom: 1px solid $secondaryColor;
-
-  &:focus,
-  &:active {
-    border-bottom: 1px solid $primaryColor;
-  }
-}
-
-.outlined {
-  min-width: 120px;
-  max-width: 180px;
-
-  background-color: transparent;
-  border: 1px solid $secondaryColor;
-
-  border-radius: 12px;
-  border-color: $primaryColor;
-}
-
-.fullWidth {
-  max-width: 100%;
 }
