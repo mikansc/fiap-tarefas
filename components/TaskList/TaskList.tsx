@@ -1,3 +1,4 @@
+import { useTasks } from "contexts/tasksContext";
 import { useState } from "react";
 import { Task } from "types/Task";
 import { TaskItem } from "./TaskItem";
@@ -8,21 +9,14 @@ interface TaskListProps {
 }
 
 export const TaskList = ({ tasks }: TaskListProps) => {
-  const [selectedId, setSelectedId] = useState("");
-
-  const handleSelect = (id: string) => {
-    if (selectedId === id) {
-      setSelectedId("");
-    } else {
-      setSelectedId(id);
-    }
-  };
+  const { handleSelectTask, selectedTask } = useTasks();
 
   return (
     <div className={styles.container}>
-      {tasks.map((task) => (
-        <TaskItem seleted={task._id === selectedId} onClick={() => handleSelect(task._id)} key={task._id} task={task} />
-      ))}
+      {tasks.map((task) => {
+        const isSelected = task._id === selectedTask?._id;
+        return <TaskItem key={task._id} task={task} seleted={isSelected} onClick={() => handleSelectTask(task)} />;
+      })}
     </div>
   );
 };

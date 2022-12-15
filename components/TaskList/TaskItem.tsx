@@ -15,8 +15,6 @@ interface TaskProps {
 
 export const TaskItem = ({ task, onClick, seleted }: TaskProps) => {
   const taskIsDone = !!task.finishDate;
-  console.log(seleted);
-
   return (
     <div className={`${styles.container} ${seleted ? styles.selected : ""}`} onClick={onClick}>
       <div className={styles.taskAction}>{taskIsDone ? <DoneIcon /> : <UndoneIcon />}</div>

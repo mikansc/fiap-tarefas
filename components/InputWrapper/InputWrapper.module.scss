@@ -22,10 +22,7 @@
     width: 100%;
     outline: transparent;
     color: $primaryColor;
-
-    @media screen and (min-width: $mediaQueryDesktop) {
-      padding: 0.75rem;
-    }
+    padding: 1rem;
   }
 
   &.default input,
@@ -33,6 +30,10 @@
     border: none;
     border-bottom: 1px solid $secondaryColor;
     padding-bottom: 0.25rem;
+
+    @media screen and (min-width: $mediaQueryDesktop) {
+      padding: 0.75rem;
+    }
 
     &:focus,
     &:active {

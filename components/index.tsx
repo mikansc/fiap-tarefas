@@ -3,6 +3,7 @@ export * from "./Button";
 export * from "./DateField";
 export * from "./EditTaskModal";
 export * from "./Filter";
+export * from "./FilterModal";
 export * from "./FooterBar";
 export * from "./InputWrapper";
 export * from "./ModalWrapper";
