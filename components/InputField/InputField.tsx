@@ -6,14 +6,15 @@ import styles from "./InputField.module.scss";
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;
+  fullWidth?: boolean;
+  variant?: "default" | "outlined";
 }
 
-export const InputField = forwardRef((props: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
-  const { icon, ...rest } = props;
+export const InputField = forwardRef(({ icon, fullWidth, variant = "default", ...rest }: InputFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
   return (
     <div className={styles.inputgroup}>
       {!!icon && icon}
-      <input {...rest} className={styles.input} ref={ref} />
+      <input {...rest} className={`${styles.input} ${styles[variant]} ${fullWidth ? styles.fullWidth : ""}`} ref={ref} />
     </div>
   );
 });
