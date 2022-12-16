@@ -1,0 +1,10 @@
+@import "styles/config.scss";
+
+.label {
+  width: 100%;
+  font-weight: bold;
+  color: $primaryColor;
+  font-size: 12px;
+  margin-left: 1rem;
+  margin-bottom: 0.25rem;
+}

@@ -1,6 +1,8 @@
-import { InputWrapper } from "components/InputWrapper";
-import { InputVariants } from "components/InputWrapper/InputWrapper";
-import { forwardRef, SelectHTMLAttributes } from "react";
+import { forwardRef } from "react";
+import type { SelectHTMLAttributes } from "react";
+
+import { InputWrapper, Label } from "components";
+import type { InputVariants } from "components/InputWrapper";
 
 type OptionItem = {
   label: string;
@@ -18,7 +20,7 @@ export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>((prop
   const { options, label, variant = "outlined", fullWidth = true, id, ...rest } = props;
   return (
     <InputWrapper fullWidth={fullWidth} variant={variant}>
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && <Label htmlFor={id}>{label}</Label>}
       <select {...rest} ref={ref}>
         <option value="">Selecione...</option>
         {props.options.map((option, index) => (

@@ -8,15 +8,6 @@
   justify-content: center;
   margin: 1rem 0;
 
-  & label {
-    width: 100%;
-    font-weight: bold;
-    color: $primaryColor;
-    font-size: 12px;
-    margin-left: 1rem;
-    margin-bottom: 0.25rem;
-  }
-
   & input,
   & select {
     width: 100%;

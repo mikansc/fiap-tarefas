@@ -1,14 +1,15 @@
-import { InputWrapper } from "components";
 import { forwardRef } from "react";
-import { ForwardedRef } from "react";
-import { InputHTMLAttributes } from "react";
+import type { ForwardedRef, InputHTMLAttributes } from "react";
+
+import { InputWrapper, Label } from "components";
+import type { InputVariants } from "components/InputWrapper";
 
 import styles from "./TextField.module.scss";
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;
   fullWidth?: boolean;
-  variant?: "default" | "outlined";
+  variant?: InputVariants;
   label?: string;
 }
 
@@ -17,7 +18,7 @@ export const TextField = forwardRef((props: TextFieldProps, ref: ForwardedRef<HT
 
   return (
     <InputWrapper fullWidth={fullWidth} variant={variant}>
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && <Label htmlFor={id}>{label}</Label>}
       <div className={styles.textfield}>
         {!!icon && icon}
         <input {...rest} id={id} ref={ref} type="text" />

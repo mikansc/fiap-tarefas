@@ -6,6 +6,7 @@ export * from "./Filter";
 export * from "./FilterModal";
 export * from "./FooterBar";
 export * from "./InputWrapper";
+export * from "./Label";
 export * from "./ModalWrapper";
 export * from "./NavBar";
 export * from "./NoContent";
