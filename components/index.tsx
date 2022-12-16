@@ -5,6 +5,7 @@ export * from "./EditTaskModal";
 export * from "./Filter";
 export * from "./FilterModal";
 export * from "./FooterBar";
+export * from "./IconButton";
 export * from "./InputWrapper";
 export * from "./Label";
 export * from "./ModalWrapper";
