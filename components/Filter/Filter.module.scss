@@ -2,16 +2,19 @@
 
 .container {
   width: 100%;
-  max-width: $maxScreenWidth;
   background-color: $lighterGreyColor;
-  margin: 1rem 0;
-  padding: 0 1rem;
+  margin: 1rem 1rem;
+  padding: 1.25rem 1rem;
   border-radius: 12px;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (min-width: $mediaQueryDesktop) {
+    padding: 0 1rem;
+  }
 }
 
 .title {
@@ -25,18 +28,13 @@
   font-size: 12px;
   display: flex;
   align-items: center;
-  & > label {
-    color: $primaryColor;
-    padding: 0 1rem 0 0;
-    white-space: nowrap;
-  }
 }
 
 .divider {
   display: block;
-  height: 40px;
-  width: 2px;
-  margin: 0 1rem;
+  height: 48px;
+  border-left: 1px solid $primaryColor;
+  margin: 0 0.5rem 0 1.5rem;
   display: block;
   background-color: $primaryColor;
 }

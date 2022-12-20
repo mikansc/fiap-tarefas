@@ -1,13 +1,16 @@
-import { DateField, FilterModal } from "components";
-import { IconButton } from "components/IconButton";
-import { SelectField } from "components/SelectField";
-import { useIsMobile } from "hooks/useIsMobile";
 import { useState } from "react";
+
+import { useForm } from "hooks/useForm";
+import { useTasks } from "contexts/tasksContext";
+import { useIsMobile } from "hooks/useIsMobile";
+
+import { DateField, FilterModal, Label, IconButton, SelectField } from "components";
 
 import styles from "./Filter.module.scss";
 
 export const Filter = () => {
   const isMobile = useIsMobile();
+  const { loadTasks } = useTasks();
 
   return (
     <div className={styles.container}>
@@ -28,23 +31,27 @@ function MobileViewFilters() {
 }
 
 function DesktopViewFilters() {
+  const { registerField, onSubmitForm } = useForm();
+
+  const handleChange = () => {
+    onSubmitForm(console.log);
+  };
+
   return (
-    <>
-      <div className={styles.dateFilters}>
-        <label htmlFor="date-from">Data prevista de conclusão:</label>
-        <DateField onChange={(e) => console.log(e.target.value)} id="date-from" />
-        <label htmlFor="date-to">até:</label>
-        <DateField onChange={(e) => console.log(e.target.value)} id="date-to" />
-        <div className={styles.divider}></div>
-        <label htmlFor="status">Status:</label>
-        <SelectField
-          onChange={(e) => console.log(e.target.value)}
-          options={[
-            { label: "Ativo", value: 0 },
-            { label: "Inativo", value: 1 },
-          ]}
-        />
-      </div>
-    </>
+    <div className={styles.dateFilters}>
+      <Label htmlFor="date-from">Data prevista de conclusão:</Label>
+      <DateField {...registerField("startDate")} onChange={(e) => console.log(e.target.value)} id="date-from" />
+      <Label htmlFor="date-to">até:</Label>
+      <DateField {...registerField("finalDate")} onChange={(e) => console.log(e.target.value)} id="date-to" />
+      <div className={styles.divider}></div>
+      <Label htmlFor="status">Status:</Label>
+      <SelectField
+        onChange={(e) => console.log(e.target.value)}
+        options={[
+          { label: "Ativo", value: 0 },
+          { label: "Inativo", value: 1 },
+        ]}
+      />
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { AddButton, Button, Filter, FooterBar, NavBar, NoContent, TaskList } from "components";
+import { AddButton, Filter, FooterBar, NavBar, NoContent, TaskList } from "components";
 import { EditTaskModal } from "components/EditTaskModal/EditTaskModal";
 import { useTasks } from "contexts/tasksContext";
 
@@ -23,8 +23,8 @@ export const Home: NextPage = () => {
           {tasks.length > 0 && <TaskList tasks={tasks} />}
         </div>
         <AddButton onClick={() => setOpened(true)} />
-        <FooterBar />
       </div>
+      <FooterBar />
       <EditTaskModal isEditing={editMode} open={isOpened} onCancel={() => setOpened(false)} />
     </>
   );

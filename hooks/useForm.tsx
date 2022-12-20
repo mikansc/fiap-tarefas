@@ -3,16 +3,21 @@ import { ChangeEvent, useState } from "react";
 export const useForm = <T,>() => {
   const [formValues, setFormValues] = useState({} as T);
 
-  function handleChange(name: string, value: string) {
+  const _handleChange = (name: string, value: string) => {
     setFormValues((pValues) => ({ ...pValues, [name]: value }));
-  }
+  };
 
   const registerField = (name: string) => {
     return {
       name,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => handleChange(e.target.name, e.target.value),
+      onChange: (e: ChangeEvent<HTMLInputElement>) => _handleChange(e.target.name, e.target.value),
+      onBlur: (e: ChangeEvent<HTMLInputElement>) => _handleChange(e.target.name, e.target.value),
     };
   };
 
-  return { registerField, formValues };
+  const onSubmitForm = (handlerCallback: Function) => {
+    handlerCallback(formValues);
+  };
+
+  return { registerField, formValues, onSubmitForm };
 };
