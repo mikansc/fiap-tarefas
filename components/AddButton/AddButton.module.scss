@@ -3,15 +3,16 @@
 .container {
   width: 100%;
   margin: 0 1rem;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
-  // position: absolute;
-  // bottom: 1rem;
+  position: absolute;
+  bottom: 1rem;
 
   @media screen and (min-width: $mediaQueryDesktop) {
-    width: 280px;
-    position: absolute;
     top: 15px;
+    bottom: initial;
+    width: 300px;
     margin-left: auto;
     margin-right: auto;
   }

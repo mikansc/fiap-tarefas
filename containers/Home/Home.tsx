@@ -18,7 +18,7 @@ export const Home: NextPage = () => {
       <NavBar />
       <div className={styles.container}>
         <Filter />
-        <div className={styles.content}>
+        <div className={styles.tasks}>
           {tasks.length == 0 && <NoContent />}
           {tasks.length > 0 && <TaskList tasks={tasks} />}
         </div>
