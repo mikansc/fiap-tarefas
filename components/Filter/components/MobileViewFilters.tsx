@@ -7,8 +7,6 @@ export function MobileViewFilters() {
   const [modalOpened, setModalOpened] = useState(false);
   const { loadTasks } = useTasks();
 
-  // loadTasks({ status: "", finalDate: "", startDate: "" });
-
   return (
     <>
       <IconButton iconName="filter" onClick={() => setModalOpened(true)} />

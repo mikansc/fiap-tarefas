@@ -1,3 +1,4 @@
+import task from "pages/api/task";
 import { useCallback, useEffect, useState } from "react";
 import { tasksService } from "services/frontend/tasks-service";
 import { Task } from "types/Task";
@@ -16,20 +17,24 @@ export const useFetchTasks = () => {
 
     let query = "?";
     if (startDate) {
-      query.concat(`finishPrevisionDateStart=${startDate}&`);
+      query += `finishPrevisionDateStart=${startDate}&`;
     }
-    if (startDate) {
-      query.concat(`finishPrevisionDateEnd=${finalDate}&`);
+    if (finalDate) {
+      query += `finishPrevisionDateEnd=${finalDate}&`;
     }
-    if (startDate) {
-      query.concat(`status=${status}`);
+    if (status) {
+      query += `status=${status}`;
     }
-
-    return await tasksService.getAll();
+    try {
+      const tasks = await tasksService.getAll(query);
+      setTasks(tasks);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   useEffect(() => {
-    fetchTasks({} as FetchTasksProps).then(setTasks);
+    fetchTasks({} as FetchTasksProps);
   }, [fetchTasks]);
 
   return { tasks, fetchTasks };

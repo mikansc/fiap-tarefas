@@ -4,9 +4,9 @@ import { HttpFetchClient } from "./http-fetch-client";
 
 const service = (httpClient: HttpFetchClient) => {
   //
-  const getAll = async (): Promise<Task[]> => {
+  const getAll = async (query: string): Promise<Task[]> => {
     try {
-      return await httpClient.get("/task");
+      return await httpClient.get("/task".concat(query || ""));
     } catch (error) {
       throw error;
     }
