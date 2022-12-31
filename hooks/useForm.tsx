@@ -1,6 +1,10 @@
 import { ChangeEvent, useState } from "react";
 
-export const useForm = <T,>() => {
+type UseFormOptions = {
+  handleOnBlur: boolean;
+};
+
+export const useForm = <T,>(options?: UseFormOptions) => {
   const [formValues, setFormValues] = useState({} as T);
 
   const _handleChange = (name: string, value: string) => {
@@ -10,8 +14,8 @@ export const useForm = <T,>() => {
   const registerField = (name: string) => {
     return {
       name,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => _handleChange(e.target.name, e.target.value),
-      onBlur: (e: ChangeEvent<HTMLInputElement>) => _handleChange(e.target.name, e.target.value),
+      onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => _handleChange(e.target.name, e.target.value),
+      onBlur: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => !!options?.handleOnBlur && _handleChange(e.target.name, e.target.value),
     };
   };
 
