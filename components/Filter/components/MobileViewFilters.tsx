@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { FilterModal, IconButton } from "components";
+import { IconButton } from "components";
 import { useTasks } from "contexts/tasksContext";
+import { FilterModal } from "./FilterModal";
 
 export function MobileViewFilters() {
   const [modalOpened, setModalOpened] = useState(false);
