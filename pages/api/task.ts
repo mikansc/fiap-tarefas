@@ -49,9 +49,42 @@ const validateUser = async (userId: string) => {
   }
 };
 
-const getTasks = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResponse | object>, userId: string) => {
-  const result = await TaskModel.find({ userId });
-  res.status(200).json(result);
+const getTasks = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResponse | Task[]>, userId: string) => {
+  const params = req.query as any;
+
+  const query = {
+    userId,
+  } as any;
+
+  if (params?.finishPrevisionDateStart) {
+    const inputDate = DateTime.fromISO(params?.finishPrevisionDateStart);
+    query.finishPrevisionDate = { $gte: inputDate.toISO() };
+  }
+
+  if (params?.finishPrevisionDateEnd) {
+    const lastDate = DateTime.fromISO(params?.finishPrevisionDateEnd);
+    if (!query.finishPrevisionDate) {
+      query.finishPrevisionDate = {};
+    }
+    query.finishPrevisionDate.$lte = lastDate.toISO();
+  }
+
+  if (params?.status) {
+    const status = parseInt(params?.status);
+    switch (status) {
+      case 1:
+        query.finishDate = null;
+        break;
+      case 2:
+        query.finishDate = { $ne: null };
+        break;
+      default:
+        break;
+    }
+  }
+
+  const result = (await TaskModel.find(query)) as Task[];
+  return res.status(200).json(result);
 };
 
 const saveTask = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResponse>, userId: string) => {
