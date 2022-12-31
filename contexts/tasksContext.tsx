@@ -26,7 +26,9 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
   const [selectedTask, setSelectedTask] = useState<Task>();
 
   const loadTasks = (filter: FetchTasksProps) => {
-    fetchTasks(filter);
+    console.log(filter);
+
+    // fetchTasks(filter);
   };
 
   const completeTask = (task: Task) => {};

@@ -3,12 +3,16 @@ import { DateField } from "components/DateField";
 import { ModalWrapper } from "components/ModalWrapper";
 import { SelectField } from "components/SelectField";
 import { useTasks } from "contexts/tasksContext";
+import { FetchTasksProps } from "hooks/useFetchTasks";
+import { useForm } from "hooks/useForm";
+import { useState } from "react";
 
 import styles from "./FilterModal.module.scss";
 
 type FilterModalProps = {
   open: boolean;
   onCancel: () => void;
+  onApply: (filters: FetchTasksProps) => void;
 };
 
 const selectOptions = [
@@ -16,17 +20,19 @@ const selectOptions = [
   { label: "Inativo", value: 1 },
 ];
 
-export const FilterModal = ({ open, onCancel }: FilterModalProps) => {
-  const { loadTasks } = useTasks();
+export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
+  const { formValues, registerField } = useForm<FetchTasksProps>();
 
   return (
     <ModalWrapper open={open}>
       <h2 className={styles.title}>Filtrar tarefas</h2>
-      <DateField label="Data de conclusão inicial" fullWidth />
-      <DateField label="Data de conclusão final" fullWidth />
-      <SelectField label="Status" fullWidth onChange={(e) => console.log(e.target.value)} options={selectOptions} />
+      <DateField {...registerField("startDate")} label="Data de conclusão inicial" fullWidth />
+      <DateField {...registerField("finalDate")} label="Data de conclusão final" fullWidth />
+      <SelectField {...registerField("status")} label="Status" fullWidth options={selectOptions} />
       <div className={styles.actionGroup}>
-        <Button onClick={() => console.log("salvar")}>Aplicar filtros</Button>
+        <Button onClick={() => onApply({ finalDate: formValues["finalDate"], startDate: formValues["startDate"], status: formValues["status"] })}>
+          Aplicar filtros
+        </Button>
         <Button variant="text" onClick={onCancel}>
           Cancelar
         </Button>
