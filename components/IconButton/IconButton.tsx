@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ButtonHTMLAttributes } from "react";
 import styles from "./IconButton.module.scss";
 
-type Icons = "exit" | "filter";
+type Icons = "exit" | "filter" | "close";
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconName: Icons;
