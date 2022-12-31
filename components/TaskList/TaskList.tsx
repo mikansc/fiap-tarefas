@@ -9,13 +9,13 @@ interface TaskListProps {
 }
 
 export const TaskList = ({ tasks }: TaskListProps) => {
-  const { handleSelectTask, selectedTask } = useTasks();
+  const { selectTask, selectedTask } = useTasks();
 
   return (
     <div className={styles.container}>
       {tasks.map((task) => {
         const isSelected = task._id === selectedTask?._id;
-        return <TaskItem key={task._id} task={task} seleted={isSelected} onClick={() => handleSelectTask(task)} />;
+        return <TaskItem key={task._id} task={task} seleted={isSelected} onClick={() => selectTask(task)} />;
       })}
     </div>
   );

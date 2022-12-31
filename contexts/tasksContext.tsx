@@ -4,11 +4,12 @@ import type { Task } from "types/Task";
 
 type initialContext = {
   tasks: Task[];
-  selectedTask: Task | null;
+  selectedTask?: Task;
   completeTask: (task: Task) => void;
   updateTask: (task: Task) => void;
   loadTasks: (filter: FetchTasksProps) => void;
-  handleSelectTask: (task: Task | null) => void;
+  selectTask: (task?: Task) => void;
+  clearSelected: (task?: Task) => void;
   deleteTask: () => void;
 };
 
@@ -22,7 +23,7 @@ export const useTasks = () => {
 
 export const TasksContextProvider = ({ children }: { children: React.ReactNode }) => {
   const { tasks, fetchTasks } = useFetchTasks();
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Task>();
 
   const loadTasks = (filter: FetchTasksProps) => {
     fetchTasks(filter);
@@ -33,18 +34,24 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
   const updateTask = (task: Task) => {};
 
   const deleteTask = () => {
-    if (window.confirm("Você quer mesmo deletar a tarefa?")) {
-      setSelectedTask(null); // TODO
-    }
+    setSelectedTask(undefined); // TODO Implementar deleção
   };
 
-  const handleSelectTask = (task: Task | null) => {
+  const selectTask = (task?: Task) => {
     if (task && (!selectedTask || selectedTask._id !== task._id)) {
       setSelectedTask(task);
     } else {
-      setSelectedTask(null);
+      clearSelected();
     }
   };
 
-  return <TaskProvider value={{ tasks, selectedTask, updateTask, completeTask, deleteTask, loadTasks, handleSelectTask }}>{children} </TaskProvider>;
+  const clearSelected = () => {
+    setSelectedTask(undefined);
+  };
+
+  return (
+    <TaskProvider value={{ tasks, selectedTask, updateTask, completeTask, deleteTask, loadTasks, selectTask, clearSelected }}>
+      {children}{" "}
+    </TaskProvider>
+  );
 };

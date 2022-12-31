@@ -7,10 +7,25 @@ import { useState } from "react";
 import styles from "./Home.module.scss";
 
 export const Home: NextPage = () => {
-  const { tasks, selectedTask } = useTasks();
+  const { tasks, selectedTask, deleteTask, clearSelected } = useTasks();
+
   const [opened, setOpened] = useState(false);
 
-  const editMode = !!selectedTask;
+  const handleCancel = () => {
+    clearSelected();
+    setOpened(false);
+  };
+
+  const handleDelete = () => {
+    if (window.confirm("Você quer mesmo deletar a tarefa?")) {
+      deleteTask(); // TODO
+    }
+  };
+  const handleSave = () => {
+    console.log("Tarefa atualizada");
+    setOpened(false);
+  };
+
   const isOpened = opened || !!selectedTask;
 
   return (
@@ -25,7 +40,7 @@ export const Home: NextPage = () => {
         <AddButton onClick={() => setOpened(true)} />
       </div>
       <FooterBar />
-      <EditTaskModal isEditing={editMode} open={isOpened} onCancel={() => setOpened(false)} />
+      <EditTaskModal task={selectedTask} open={isOpened} onCancel={handleCancel} onDelete={handleDelete} onSave={handleSave} />
     </>
   );
 };
