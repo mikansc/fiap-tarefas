@@ -1,4 +1,4 @@
-import { Button } from "components/Button";
+import { Button } from "components/Buttons";
 import { DateField } from "components/DateField";
 import { ModalWrapper } from "components/ModalWrapper";
 import { SelectField } from "components/SelectField";

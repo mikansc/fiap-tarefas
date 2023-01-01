@@ -1,5 +1,4 @@
-export * from "./AddButton";
-export * from "./Button";
+export * from "./Buttons";
 export * from "./DateField";
 export * from "./EditTaskModal";
 export * from "./Filter";

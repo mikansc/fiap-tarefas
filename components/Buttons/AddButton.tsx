@@ -1,7 +1,8 @@
 import { ButtonHTMLAttributes } from "react";
 
+import { AddIcon } from "./components/AddIcon";
+
 import styles from "./AddButton.module.scss";
-import { AddIcon } from "./AddIcon";
 
 interface AddButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
