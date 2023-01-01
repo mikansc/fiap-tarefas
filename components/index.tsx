@@ -2,7 +2,6 @@ export * from "./Buttons";
 export * from "./DateField";
 export * from "./Filter";
 export * from "./FooterBar";
-export * from "./IconButton";
 export * from "./InputWrapper";
 export * from "./Label";
 export * from "./Modals";

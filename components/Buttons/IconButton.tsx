@@ -1,5 +1,6 @@
+import type { ButtonHTMLAttributes } from "react";
 import Image from "next/image";
-import { ButtonHTMLAttributes } from "react";
+
 import styles from "./IconButton.module.scss";
 
 type Icons = "exit" | "filter" | "close";

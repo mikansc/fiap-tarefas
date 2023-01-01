@@ -1,6 +1,9 @@
-import { IconButton } from "components/IconButton";
-import { useAuth } from "contexts/authContext";
 import Image from "next/image";
+
+import { useAuth } from "contexts/authContext";
+
+import { IconButton } from "components";
+
 import styles from "./NavBar.module.scss";
 
 export const NavBar = () => {
