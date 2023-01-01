@@ -13,8 +13,9 @@ type FilterModalProps = {
 };
 
 const selectOptions = [
-  { label: "Ativo", value: 0 },
-  { label: "Inativo", value: 1 },
+  { label: "Todas", value: 0 },
+  { label: "Não finalizadas", value: 1 },
+  { label: "Finalizadas", value: 2 },
 ];
 
 export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
