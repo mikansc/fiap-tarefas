@@ -69,7 +69,7 @@ const getTasks = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResp
     query.finishPrevisionDate.$lte = lastDate.toISO();
   }
 
-  if (params?.status) {
+  if (params?.status && params?.status != 0) {
     const status = parseInt(params?.status);
     switch (status) {
       case 1:
@@ -79,7 +79,7 @@ const getTasks = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResp
         query.finishDate = { $ne: null };
         break;
       default:
-        break;
+        return res.status(400).json({ error: "O status deve ser 0 (todas), 1 (não finalizadas) ou 2 (finalizadas)" });
     }
   }
 
