@@ -23,5 +23,9 @@ export const useForm = <T,>(options?: UseFormOptions) => {
     handlerCallback(formValues);
   };
 
-  return { registerField, formValues, onSubmitForm };
+  const clearForm = () => {
+    setFormValues({} as T);
+  };
+
+  return { registerField, formValues, onSubmitForm, clearForm };
 };

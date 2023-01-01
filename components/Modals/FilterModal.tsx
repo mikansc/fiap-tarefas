@@ -19,7 +19,17 @@ const selectOptions = [
 ];
 
 export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
-  const { formValues, registerField } = useForm<FetchTasksProps>();
+  const { formValues, registerField, clearForm } = useForm<FetchTasksProps>();
+
+  const handleOnApplyFilters = () => {
+    onApply({
+      finalDate: formValues["finalDate"],
+      startDate: formValues["startDate"],
+      status: formValues["status"],
+    });
+    clearForm();
+    onCancel();
+  };
 
   return (
     <ModalWrapper open={open}>
@@ -28,9 +38,7 @@ export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
       <DateField {...registerField("finalDate")} label="Data de conclusão final" fullWidth />
       <SelectField {...registerField("status")} label="Status" fullWidth options={selectOptions} />
       <div className={styles.actionGroup}>
-        <Button onClick={() => onApply({ finalDate: formValues["finalDate"], startDate: formValues["startDate"], status: formValues["status"] })}>
-          Aplicar filtros
-        </Button>
+        <Button onClick={handleOnApplyFilters}>Aplicar filtros</Button>
         <Button variant="text" onClick={onCancel}>
           Cancelar
         </Button>
