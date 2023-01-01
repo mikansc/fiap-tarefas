@@ -1,6 +1,8 @@
-import { FetchTasksProps, useFetchTasks } from "hooks/useFetchTasks";
-import { createContext, useContext, useState } from "react";
 import type { Task } from "types/Task";
+
+import { createContext, useCallback, useContext, useState } from "react";
+
+import { FetchTasksProps, useFetchTasks } from "hooks/useFetchTasks";
 
 type initialContext = {
   tasks: Task[];
@@ -25,9 +27,12 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
   const { tasks, fetchTasks } = useFetchTasks();
   const [selectedTask, setSelectedTask] = useState<Task>();
 
-  const loadTasks = (filter: FetchTasksProps) => {
-    fetchTasks(filter);
-  };
+  const loadTasks = useCallback(
+    (filter: FetchTasksProps) => {
+      fetchTasks(filter);
+    },
+    [fetchTasks]
+  );
 
   const completeTask = (task: Task) => {};
 
