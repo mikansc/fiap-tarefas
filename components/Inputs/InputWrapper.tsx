@@ -1,5 +1,3 @@
-import { InputHTMLAttributes } from "react";
-
 import styles from "./InputWrapper.module.scss";
 
 export type InputVariants = "default" | "outlined";

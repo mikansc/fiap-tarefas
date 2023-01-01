@@ -1,8 +1,9 @@
-import { forwardRef } from "react";
 import type { SelectHTMLAttributes } from "react";
+import type { InputVariants } from "components/Inputs";
+
+import { forwardRef } from "react";
 
 import { InputWrapper, Label } from "components";
-import type { InputVariants } from "components/InputWrapper";
 
 type OptionItem = {
   label: string;
