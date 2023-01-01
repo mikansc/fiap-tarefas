@@ -1,9 +1,10 @@
-import { AddButton, Filter, FooterBar, NavBar, NoContent, TaskList } from "components";
-import { EditTaskModal } from "components/EditTaskModal/EditTaskModal";
+import { useState } from "react";
+import { NextPage } from "next";
+
 import { useTasks } from "contexts/tasksContext";
 
-import { NextPage } from "next";
-import { useState } from "react";
+import { AddButton, EditTaskModal, Filter, FooterBar, NavBar, NoContent, TaskList } from "components";
+
 import styles from "./Home.module.scss";
 
 export const Home: NextPage = () => {

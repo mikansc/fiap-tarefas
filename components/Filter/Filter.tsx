@@ -1,6 +1,7 @@
 import { useIsMobile } from "hooks/useIsMobile";
-import { MobileViewFilters } from "./components/MobileViewFilters";
-import { DesktopViewFilters } from "./components/DesktopViewFilters";
+
+import { MobileViewFilters } from "./MobileViewFilters";
+import { DesktopViewFilters } from "./DesktopViewFilters";
 
 import styles from "./Filter.module.scss";
 

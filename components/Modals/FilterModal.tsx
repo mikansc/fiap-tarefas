@@ -1,11 +1,8 @@
-import { Button } from "components/Buttons";
-import { DateField } from "components/DateField";
-import { ModalWrapper } from "components/ModalWrapper";
-import { SelectField } from "components/SelectField";
-import { useTasks } from "contexts/tasksContext";
-import { FetchTasksProps } from "hooks/useFetchTasks";
 import { useForm } from "hooks/useForm";
-import { useState } from "react";
+import { FetchTasksProps } from "hooks/useFetchTasks";
+
+import { ModalWrapper } from "./ModalWrapper";
+import { SelectField, Button, DateField } from "components";
 
 import styles from "./FilterModal.module.scss";
 

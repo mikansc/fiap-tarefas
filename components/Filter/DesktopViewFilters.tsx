@@ -1,7 +1,8 @@
 import { useForm } from "hooks/useForm";
+
 import { DateField, Label, SelectField } from "components";
 
-import styles from "../Filter.module.scss";
+import styles from "./Filter.module.scss";
 
 export function DesktopViewFilters() {
   const { registerField, onSubmitForm } = useForm();

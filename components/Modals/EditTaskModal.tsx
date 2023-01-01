@@ -1,10 +1,7 @@
 import type { Task } from "types/Task";
 
-import { Button } from "components/Buttons";
-import { DateField } from "components/DateField";
-import { TextField } from "components/TextField";
-import { IconButton } from "components/IconButton";
-import { ModalWrapper } from "components/ModalWrapper";
+import { ModalWrapper } from "./ModalWrapper";
+import { Button, DateField, TextField, IconButton } from "components";
 
 import styles from "./EditTaskModal.module.scss";
 
