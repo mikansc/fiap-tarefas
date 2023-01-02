@@ -8,12 +8,15 @@ import { useTasks } from "contexts/tasksContext";
 import { DateField, Label, SelectField } from "components";
 
 import styles from "./Filter.module.scss";
+import { asDateString } from "services/shared/date-service";
 
 const selectOptions = [
   { label: "Todas", value: 0 },
   { label: "Não finalizadas", value: 1 },
   { label: "Finalizadas", value: 2 },
 ];
+
+const dateFieldConfig = { change: true, blur: true, mutate: asDateString };
 
 export function DesktopViewFilters() {
   const { registerField, formValues } = useForm<FetchTasksQuery>();
@@ -29,8 +32,6 @@ export function DesktopViewFilters() {
       loadTasks({ finalDate, startDate, status });
     }
   }, [formValues, loadTasks]);
-
-  const dateFieldConfig = { change: false, blur: true };
 
   return (
     <div className={styles.dateFilters}>

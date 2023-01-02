@@ -5,6 +5,7 @@ import { ModalWrapper } from "./ModalWrapper";
 import { SelectField, Button, DateField } from "components";
 
 import styles from "./FilterModal.module.scss";
+import { asDateString } from "services/shared/date-service";
 
 type FilterModalProps = {
   open: boolean;
@@ -17,6 +18,8 @@ const selectOptions = [
   { label: "Não finalizadas", value: 1 },
   { label: "Finalizadas", value: 2 },
 ];
+
+const dateFieldConfig = { change: true, blur: true, mutate: asDateString };
 
 export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
   const { formValues, registerField, clearForm } = useForm<FetchTasksQuery>();
@@ -34,8 +37,8 @@ export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
   return (
     <ModalWrapper open={open}>
       <h2 className={styles.title}>Filtrar tarefas</h2>
-      <DateField {...registerField("startDate")} label="Data de conclusão inicial" fullWidth />
-      <DateField {...registerField("finalDate")} label="Data de conclusão final" fullWidth />
+      <DateField {...registerField("startDate", dateFieldConfig)} label="Data de conclusão inicial" fullWidth />
+      <DateField {...registerField("finalDate", dateFieldConfig)} label="Data de conclusão final" fullWidth />
       <SelectField {...registerField("status")} label="Status" fullWidth options={selectOptions} />
       <div className={styles.actionGroup}>
         <Button onClick={handleOnApplyFilters}>Aplicar filtros</Button>

@@ -2,7 +2,7 @@ import type { ChangeEvent } from "react";
 
 import { useCallback, useState } from "react";
 
-type RegisterOptions = { change?: boolean; blur?: boolean };
+type RegisterOptions = { change?: boolean; blur?: boolean; mutate?: (value: string) => string };
 type FieldEvent = ChangeEvent<HTMLInputElement | HTMLSelectElement>;
 
 type FormDataType<T> = {
@@ -17,14 +17,16 @@ export const useForm = <T,>() => {
   };
 
   const registerField = (name: keyof T, config?: RegisterOptions) => {
-    const registerConfig = { change: true, blur: false, ...config };
-    const { blur, change } = registerConfig;
+    const registerConfig = { change: true, blur: false, mutate: undefined, ...config };
+    const { blur, change, mutate } = registerConfig;
+
+    const value = formValues[name as keyof T] || "";
 
     const configuration = {
       name,
-      value: formValues[name as keyof T] || "",
-      onChange: (e: FieldEvent) => change && _handleChange(e.target.name, e.target.value),
-      onBlur: (e: FieldEvent) => blur && _handleChange(e.target.name, e.target.value),
+      value,
+      onChange: (e: FieldEvent) => change && _handleChange(e.target.name, mutate ? mutate(e.target.value) : e.target.value),
+      onBlur: (e: FieldEvent) => blur && _handleChange(e.target.name, mutate ? mutate(e.target.value) : e.target.value),
     };
 
     return configuration;
