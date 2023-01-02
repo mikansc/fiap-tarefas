@@ -1,7 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { loginService } from "services/frontend/login-service";
-import { clearStorage, getFromStorage, setToStorage } from "services/frontend/storage-service";
+import type { ReactNode } from "react";
 import type { ILoginCredentials, IUserResponse } from "types/User";
+
+import { createContext, useContext, useEffect, useState } from "react";
+
+import { loginService } from "services/frontend/login-http-service";
+import { clearStorage, getFromStorage, setToStorage } from "services/frontend/storage-service";
 
 const initialContext = {
   isLoggedIn: false,
@@ -20,7 +23,7 @@ export const useAuth = () => {
   return ctx;
 };
 
-export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IUserResponse>({} as IUserResponse);
 
   const isLoggedIn = Boolean(user.token && user.name && user.email);
