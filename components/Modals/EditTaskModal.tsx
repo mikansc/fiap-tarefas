@@ -19,12 +19,13 @@ type EditTaskModalProps = {
 };
 
 export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTaskModalProps) => {
-  const { setValues, registerField, formValues } = useForm<Task>();
+  const { setValues, registerField, formValues, clearForm } = useForm<Task>();
   const isEditing = !!task;
 
   useEffect(() => {
     if (isEditing) setValues(task);
-  }, [isEditing, setValues, task]);
+    return () => clearForm();
+  }, [isEditing, setValues, task, clearForm]);
 
   const renderCloseButton = () => {
     return isEditing ? <IconButton iconName="close" onClick={onCancel} /> : null;
@@ -42,6 +43,19 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
     );
   };
 
+  const renderDateField = () => {
+    return isEditing ? (
+      <DateField {...registerField("finishDate")} label="Data de conclusão" fullWidth value={asDateString(formValues["finishDate"] || "")} />
+    ) : (
+      <DateField
+        {...registerField("finishPrevisionDate")}
+        label="Data prevista para conclusão"
+        fullWidth
+        value={asDateString(formValues["finishDate"] || "")}
+      />
+    );
+  };
+
   return (
     <ModalWrapper open={open}>
       <div className={styles.modalContent}>
@@ -55,7 +69,7 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
           placeholder="Título da tarefa"
           id="titulo-tarefa"
         />
-        <DateField {...registerField("finishDate")} label="Data de conclusão" fullWidth value={asDateString(formValues["finishDate"] || "")} />
+        {renderDateField()}
         <div className={styles.actionGroup}>
           <Button onClick={() => onSave(formValues as Task)}>Salvar alterações</Button>
           {renderSecondaryActionButton()}

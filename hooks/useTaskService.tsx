@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { tasksService } from "services/frontend/tasks-http-service";
 
-export type FetchTasksProps = {
+export type FetchTasksQuery = {
   startDate: string;
   finalDate: string;
   status: string;
@@ -13,8 +13,8 @@ export type FetchTasksProps = {
 export const useTaskService = () => {
   const [tasks, setTasks] = useState([] as Task[]);
 
-  const fetchTasks = useCallback(async (props: FetchTasksProps) => {
-    const { startDate, finalDate, status } = props;
+  const getAll = useCallback(async (queries: FetchTasksQuery) => {
+    const { startDate, finalDate, status } = queries;
 
     let query = "?";
     if (startDate) {
@@ -34,23 +34,35 @@ export const useTaskService = () => {
     }
   }, []);
 
-  const updateTask = useCallback(
+  const create = useCallback(
     async (task: Task) => {
       try {
-        await tasksService.update(task);
-        fetchTasks({} as FetchTasksProps);
+        await tasksService.create(task);
+        getAll({} as FetchTasksQuery);
       } catch (error) {
         console.log(error);
       }
     },
-    [fetchTasks]
+    [getAll]
+  );
+
+  const update = useCallback(
+    async (task: Task) => {
+      try {
+        await tasksService.update(task);
+        getAll({} as FetchTasksQuery);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [getAll]
   );
 
   useEffect(() => {
-    fetchTasks({} as FetchTasksProps);
-  }, [fetchTasks]);
+    getAll({} as FetchTasksQuery);
+  }, [getAll]);
 
-  return { tasks, fetchTasks, updateTask };
+  return { tasks, getAll, update, create };
 };
 
 // ?finishPrevisionDateStart=&finishPrevisionDateEnd=&status=

@@ -1,4 +1,4 @@
-import type { FetchTasksProps } from "hooks/useTaskService";
+import type { FetchTasksQuery } from "hooks/useTaskService";
 
 import { useEffect } from "react";
 
@@ -16,7 +16,7 @@ const selectOptions = [
 ];
 
 export function DesktopViewFilters() {
-  const { registerField, formValues } = useForm<FetchTasksProps>();
+  const { registerField, formValues } = useForm<FetchTasksQuery>();
   const { loadTasks } = useTasks();
 
   useEffect(() => {

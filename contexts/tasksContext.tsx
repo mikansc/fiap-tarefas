@@ -1,5 +1,5 @@
 import type { Task } from "types/Task";
-import type { FetchTasksProps } from "hooks/useTaskService";
+import type { FetchTasksQuery } from "hooks/useTaskService";
 
 import { createContext, useCallback, useContext, useState } from "react";
 
@@ -8,12 +8,12 @@ import { useTaskService } from "hooks/useTaskService";
 type initialContext = {
   tasks: Task[];
   selectedTask?: Task;
-  completeTask: (task: Task) => void;
+  createTask: (task: Task) => void;
   updateTask: (task: Task) => void;
-  loadTasks: (filter: FetchTasksProps) => void;
+  deleteTask: () => void;
+  loadTasks: (filter: FetchTasksQuery) => void;
   selectTask: (task?: Task) => void;
   clearSelected: (task?: Task) => void;
-  deleteTask: () => void;
 };
 
 const taskContext = createContext({} as initialContext);
@@ -25,21 +25,24 @@ export const useTasks = () => {
 };
 
 export const TasksContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const { tasks, fetchTasks, updateTask: updateTaskService } = useTaskService();
-  const [selectedTask, setSelectedTask] = useState<Task>();
+  const { tasks, getAll, update, create } = useTaskService();
+  const [selectedTask, setSelectedTask] = useState<Task>(); // TODO Implementar teste automatizado para garantir valor vazio quando necessario
 
   const loadTasks = useCallback(
-    (filter: FetchTasksProps) => {
-      fetchTasks(filter);
+    (filter: FetchTasksQuery) => {
+      getAll(filter);
       clearSelected();
     },
-    [fetchTasks]
+    [getAll]
   );
 
-  const completeTask = (task: Task) => {};
-
   const updateTask = (task: Task) => {
-    updateTaskService(task);
+    update(task);
+    clearSelected();
+  };
+
+  const createTask = (task: Task) => {
+    create(task);
     clearSelected();
   };
 
@@ -60,8 +63,6 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
   };
 
   return (
-    <TaskProvider value={{ tasks, selectedTask, updateTask, completeTask, deleteTask, loadTasks, selectTask, clearSelected }}>
-      {children}{" "}
-    </TaskProvider>
+    <TaskProvider value={{ tasks, selectedTask, updateTask, createTask, deleteTask, loadTasks, selectTask, clearSelected }}>{children} </TaskProvider>
   );
 };

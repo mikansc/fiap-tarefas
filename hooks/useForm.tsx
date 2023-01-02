@@ -32,7 +32,7 @@ export const useForm = <T,>() => {
 
   const onSubmitForm = (handlerCallback: Function) => handlerCallback(formValues);
 
-  const clearForm = () => setFormValues({} as FormDataType<T>);
+  const clearForm = useCallback(() => setFormValues({} as FormDataType<T>), []);
 
   const setValues = useCallback((values: Partial<FormDataType<T>>) => {
     setFormValues(values);

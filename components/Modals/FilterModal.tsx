@@ -1,5 +1,5 @@
 import { useForm } from "hooks/useForm";
-import { FetchTasksProps } from "hooks/useTaskService";
+import { FetchTasksQuery } from "hooks/useTaskService";
 
 import { ModalWrapper } from "./ModalWrapper";
 import { SelectField, Button, DateField } from "components";
@@ -9,7 +9,7 @@ import styles from "./FilterModal.module.scss";
 type FilterModalProps = {
   open: boolean;
   onCancel: () => void;
-  onApply: (filters: FetchTasksProps) => void;
+  onApply: (filters: FetchTasksQuery) => void;
 };
 
 const selectOptions = [
@@ -19,7 +19,7 @@ const selectOptions = [
 ];
 
 export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
-  const { formValues, registerField, clearForm } = useForm<FetchTasksProps>();
+  const { formValues, registerField, clearForm } = useForm<FetchTasksQuery>();
 
   const handleOnApplyFilters = () => {
     onApply({

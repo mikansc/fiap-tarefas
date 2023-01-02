@@ -10,13 +10,14 @@ import { AddButton, EditTaskModal, Filter, FooterBar, NavBar, NoContent, TaskLis
 import styles from "./Home.module.scss";
 
 export const Home: NextPage = () => {
-  const { tasks, selectedTask, deleteTask, clearSelected, updateTask } = useTasks();
+  const { tasks, selectedTask, deleteTask, clearSelected, updateTask, createTask } = useTasks();
+  const isEditing = !!selectedTask;
 
   const [opened, setOpened] = useState(false);
 
   const handleCancel = () => {
-    clearSelected();
-    setOpened(false);
+    if (isEditing) clearSelected();
+    else setOpened(false);
   };
 
   const handleDelete = () => {
@@ -25,7 +26,8 @@ export const Home: NextPage = () => {
     }
   };
   const handleSave = (task: Task) => {
-    updateTask(task);
+    if (isEditing) updateTask(task);
+    else createTask(task);
   };
 
   const isOpened = opened || !!selectedTask;
