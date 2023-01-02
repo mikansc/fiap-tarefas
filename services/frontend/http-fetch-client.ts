@@ -1,4 +1,4 @@
-import { getHeaders } from "services/utils/get-headers";
+import { getHeaders } from "services/frontend/utils/get-headers";
 
 export class HttpFetchClient {
   url = "/api";
