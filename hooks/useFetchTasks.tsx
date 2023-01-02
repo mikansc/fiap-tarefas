@@ -1,7 +1,8 @@
-import task from "pages/api/task";
+import type { Task } from "types/Task";
+
 import { useCallback, useEffect, useState } from "react";
-import { tasksService } from "services/frontend/tasks-service";
-import { Task } from "types/Task";
+
+import { tasksService } from "services/frontend/tasks-http-service";
 
 export type FetchTasksProps = {
   startDate: string;
