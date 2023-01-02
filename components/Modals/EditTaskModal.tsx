@@ -1,5 +1,10 @@
 import type { Task } from "types/Task";
 
+import { useEffect } from "react";
+
+import { useForm } from "hooks/useForm";
+import { asDateString } from "services/shared/date-service";
+
 import { ModalWrapper } from "./ModalWrapper";
 import { Button, DateField, TextField, IconButton } from "components";
 
@@ -10,11 +15,16 @@ type EditTaskModalProps = {
   task?: Task;
   onCancel: () => void;
   onDelete: () => void;
-  onSave: () => void;
+  onSave: (task: Task) => void;
 };
 
 export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTaskModalProps) => {
+  const { setValues, registerField, formValues } = useForm<Task>();
   const isEditing = !!task;
+
+  useEffect(() => {
+    if (isEditing) setValues(task);
+  }, [isEditing, setValues, task]);
 
   const renderCloseButton = () => {
     return isEditing ? <IconButton iconName="close" onClick={onCancel} /> : null;
@@ -37,10 +47,17 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
       <div className={styles.modalContent}>
         <h2 className={styles.title}>{isEditing ? "Editar" : "Nova"} tarefa</h2>
         <div className={styles.closeBtn}>{renderCloseButton()}</div>
-        <TextField label="Título da tarefa" variant="outlined" fullWidth placeholder="Título da tarefa" id="titulo-tarefa" />
-        <DateField label="Data de conclusão" fullWidth />
+        <TextField
+          {...registerField("name")}
+          label="Título da tarefa"
+          variant="outlined"
+          fullWidth
+          placeholder="Título da tarefa"
+          id="titulo-tarefa"
+        />
+        <DateField {...registerField("finishDate")} label="Data de conclusão" fullWidth value={asDateString(formValues["finishDate"] || "")} />
         <div className={styles.actionGroup}>
-          <Button onClick={onSave}>Salvar alterações</Button>
+          <Button onClick={() => onSave(formValues as Task)}>Salvar alterações</Button>
           {renderSecondaryActionButton()}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import type { FetchTasksProps } from "hooks/useFetchTasks";
+import type { FetchTasksProps } from "hooks/useTaskService";
 
 import { useEffect } from "react";
 
@@ -20,9 +20,9 @@ export function DesktopViewFilters() {
   const { loadTasks } = useTasks();
 
   useEffect(() => {
-    const finalDate = formValues["finalDate"];
-    const startDate = formValues["startDate"];
-    const status = formValues["status"];
+    const finalDate = formValues["finalDate"] as string;
+    const startDate = formValues["startDate"] as string;
+    const status = formValues["status"] as string;
 
     // Para que o efeito não dispare na primeira renderização
     if (finalDate || startDate || status) {

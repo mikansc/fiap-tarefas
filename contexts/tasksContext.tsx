@@ -1,8 +1,9 @@
 import type { Task } from "types/Task";
+import type { FetchTasksProps } from "hooks/useTaskService";
 
 import { createContext, useCallback, useContext, useState } from "react";
 
-import { FetchTasksProps, useFetchTasks } from "hooks/useFetchTasks";
+import { useTaskService } from "hooks/useTaskService";
 
 type initialContext = {
   tasks: Task[];
@@ -24,7 +25,7 @@ export const useTasks = () => {
 };
 
 export const TasksContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const { tasks, fetchTasks } = useFetchTasks();
+  const { tasks, fetchTasks, updateTask: updateTaskService } = useTaskService();
   const [selectedTask, setSelectedTask] = useState<Task>();
 
   const loadTasks = useCallback(
@@ -36,7 +37,10 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
 
   const completeTask = (task: Task) => {};
 
-  const updateTask = (task: Task) => {};
+  const updateTask = (task: Task) => {
+    updateTaskService(task);
+    setSelectedTask(undefined);
+  };
 
   const deleteTask = () => {
     setSelectedTask(undefined); // TODO Implementar deleção

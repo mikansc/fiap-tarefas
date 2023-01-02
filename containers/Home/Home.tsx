@@ -1,3 +1,5 @@
+import type { Task } from "types/Task";
+
 import { useState } from "react";
 import { NextPage } from "next";
 
@@ -8,7 +10,7 @@ import { AddButton, EditTaskModal, Filter, FooterBar, NavBar, NoContent, TaskLis
 import styles from "./Home.module.scss";
 
 export const Home: NextPage = () => {
-  const { tasks, selectedTask, deleteTask, clearSelected } = useTasks();
+  const { tasks, selectedTask, deleteTask, clearSelected, updateTask } = useTasks();
 
   const [opened, setOpened] = useState(false);
 
@@ -22,9 +24,8 @@ export const Home: NextPage = () => {
       deleteTask(); // TODO
     }
   };
-  const handleSave = () => {
-    console.log("Tarefa atualizada");
-    setOpened(false);
+  const handleSave = (task: Task) => {
+    updateTask(task);
   };
 
   const isOpened = opened || !!selectedTask;

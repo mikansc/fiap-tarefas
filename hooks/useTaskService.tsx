@@ -7,10 +7,10 @@ import { tasksService } from "services/frontend/tasks-http-service";
 export type FetchTasksProps = {
   startDate: string;
   finalDate: string;
-  status: number;
+  status: string;
 };
 
-export const useFetchTasks = () => {
+export const useTaskService = () => {
   const [tasks, setTasks] = useState([] as Task[]);
 
   const fetchTasks = useCallback(async (props: FetchTasksProps) => {
@@ -34,11 +34,23 @@ export const useFetchTasks = () => {
     }
   }, []);
 
+  const updateTask = useCallback(
+    async (task: Task) => {
+      try {
+        await tasksService.update(task);
+        fetchTasks({} as FetchTasksProps);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [fetchTasks]
+  );
+
   useEffect(() => {
     fetchTasks({} as FetchTasksProps);
   }, [fetchTasks]);
 
-  return { tasks, fetchTasks };
+  return { tasks, fetchTasks, updateTask };
 };
 
 // ?finishPrevisionDateStart=&finishPrevisionDateEnd=&status=

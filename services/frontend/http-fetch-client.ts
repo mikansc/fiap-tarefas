@@ -1,6 +1,6 @@
 import { getHeaders } from "services/frontend/utils/get-headers";
 
-export class HttpFetchClient {
+export class HttpFetchClient<T> {
   url = "/api";
   get(resource: string) {
     return fetch(this.url + resource, {
@@ -9,10 +9,25 @@ export class HttpFetchClient {
     }).then(handleResponse);
   }
 
-  post(resource: string, data = {}) {
+  post(resource: string, data?: T) {
     return fetch(this.url + resource, {
       method: "POST",
       body: JSON.stringify(data),
+      headers: getHeaders(),
+    }).then(handleResponse);
+  }
+
+  put(resource: string, data: T) {
+    return fetch(this.url + resource, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: getHeaders(),
+    }).then(handleResponse);
+  }
+
+  delete(resource: string) {
+    return fetch(this.url + resource, {
+      method: "DELETE",
       headers: getHeaders(),
     }).then(handleResponse);
   }

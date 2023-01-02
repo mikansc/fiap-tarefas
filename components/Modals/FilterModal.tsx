@@ -1,5 +1,5 @@
 import { useForm } from "hooks/useForm";
-import { FetchTasksProps } from "hooks/useFetchTasks";
+import { FetchTasksProps } from "hooks/useTaskService";
 
 import { ModalWrapper } from "./ModalWrapper";
 import { SelectField, Button, DateField } from "components";
@@ -23,9 +23,9 @@ export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
 
   const handleOnApplyFilters = () => {
     onApply({
-      finalDate: formValues["finalDate"],
-      startDate: formValues["startDate"],
-      status: formValues["status"],
+      finalDate: formValues["finalDate"] as string,
+      startDate: formValues["startDate"] as string,
+      status: formValues["status"] as string,
     });
     clearForm();
     onCancel();
