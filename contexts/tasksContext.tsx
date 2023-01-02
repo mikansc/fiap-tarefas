@@ -31,6 +31,7 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
   const loadTasks = useCallback(
     (filter: FetchTasksProps) => {
       fetchTasks(filter);
+      clearSelected();
     },
     [fetchTasks]
   );
@@ -39,11 +40,11 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
 
   const updateTask = (task: Task) => {
     updateTaskService(task);
-    setSelectedTask(undefined);
+    clearSelected();
   };
 
   const deleteTask = () => {
-    setSelectedTask(undefined); // TODO Implementar deleção
+    clearSelected(); // TODO Implementar deleção
   };
 
   const selectTask = (task?: Task) => {
