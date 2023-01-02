@@ -21,7 +21,7 @@ export const TaskItem = ({ task, onClick, seleted }: TaskProps) => {
       <div className={styles.taskContent}>
         <span className={`${styles.taskTitle} ${taskIsDone ? styles.taskDone : ""}`}>{task.name}</span>
         {taskIsDone ? (
-          <span className={styles.taskDue}>Concluída em: {task.finishPrevisionDate ? formatDate(task.finishPrevisionDate) : "-"}</span>
+          <span className={styles.taskDue}>Concluída em: {task.finishDate ? formatDate(task.finishDate) : "-"}</span>
         ) : (
           <span className={styles.taskDue}>Conclusão em: {task.finishPrevisionDate ? formatDate(task.finishPrevisionDate) : "-"}</span>
         )}
