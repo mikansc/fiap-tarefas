@@ -1,11 +1,12 @@
+import type { FetchTasksQuery } from "hooks/useTaskService";
+
 import { useForm } from "hooks/useForm";
-import { FetchTasksQuery } from "hooks/useTaskService";
+import { dateFieldConfig } from "./utils/date-field-config";
 
 import { ModalWrapper } from "./ModalWrapper";
 import { SelectField, Button, DateField } from "components";
 
 import styles from "./FilterModal.module.scss";
-import { asDateString } from "services/shared/date-service";
 
 type FilterModalProps = {
   open: boolean;
@@ -18,8 +19,6 @@ const selectOptions = [
   { label: "Não finalizadas", value: 1 },
   { label: "Finalizadas", value: 2 },
 ];
-
-const dateFieldConfig = { change: true, blur: true, mutate: asDateString };
 
 export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
   const { formValues, registerField, clearForm } = useForm<FetchTasksQuery>();

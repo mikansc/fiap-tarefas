@@ -58,11 +58,23 @@ export const useTaskService = () => {
     [getAll]
   );
 
+  const remove = useCallback(
+    async (task: Task) => {
+      try {
+        await tasksService.delete(task);
+        getAll({} as FetchTasksQuery);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [getAll]
+  );
+
   useEffect(() => {
     getAll({} as FetchTasksQuery);
   }, [getAll]);
 
-  return { tasks, getAll, update, create };
+  return { tasks, getAll, update, create, remove };
 };
 
 // ?finishPrevisionDateStart=&finishPrevisionDateEnd=&status=

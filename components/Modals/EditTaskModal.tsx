@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { useForm } from "hooks/useForm";
 import { asDateString } from "services/shared/date-service";
+import { dateFieldConfig } from "./utils/date-field-config";
 
 import { ModalWrapper } from "./ModalWrapper";
 import { Button, DateField, TextField, IconButton } from "components";
@@ -14,7 +15,7 @@ type EditTaskModalProps = {
   open: boolean;
   task?: Task;
   onCancel: () => void;
-  onDelete: () => void;
+  onDelete: (task: Task) => void;
   onSave: (task: Task) => void;
 };
 
@@ -23,21 +24,25 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
   const isEditing = !!task;
 
   useEffect(() => {
-    if (isEditing) setValues(task);
-    return () => clearForm();
-  }, [isEditing, setValues, task, clearForm]);
+    if (isEditing) setValues({ ...task, finishDate: asDateString(task.finishDate!), finishPrevisionDate: asDateString(task.finishPrevisionDate) });
+  }, [isEditing, setValues, task]);
+
+  const handleCancelOperation = () => {
+    clearForm();
+    onCancel();
+  };
 
   const renderCloseButton = () => {
-    return isEditing ? <IconButton iconName="close" onClick={onCancel} /> : null;
+    return isEditing ? <IconButton iconName="close" onClick={handleCancelOperation} /> : null;
   };
 
   const renderSecondaryActionButton = () => {
     return isEditing ? (
-      <Button variant="text" onClick={onDelete}>
+      <Button variant="text" onClick={() => onDelete(task)}>
         Excluir tarefa
       </Button>
     ) : (
-      <Button variant="text" onClick={onCancel}>
+      <Button variant="text" onClick={handleCancelOperation}>
         Cancelar
       </Button>
     );
@@ -45,14 +50,9 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
 
   const renderDateField = () => {
     return isEditing ? (
-      <DateField {...registerField("finishDate")} label="Data de conclusão" fullWidth value={asDateString(formValues["finishDate"] || "")} />
+      <DateField {...registerField("finishDate", dateFieldConfig)} label="Data de conclusão" fullWidth />
     ) : (
-      <DateField
-        {...registerField("finishPrevisionDate")}
-        label="Data prevista para conclusão"
-        fullWidth
-        value={asDateString(formValues["finishDate"] || "")}
-      />
+      <DateField {...registerField("finishPrevisionDate", dateFieldConfig)} label="Data prevista para conclusão" fullWidth />
     );
   };
 

@@ -10,9 +10,9 @@ type initialContext = {
   selectedTask?: Task;
   createTask: (task: Task) => void;
   updateTask: (task: Task) => void;
-  deleteTask: () => void;
-  loadTasks: (filter: FetchTasksQuery) => void;
+  deleteTask: (task: Task) => void;
   selectTask: (task?: Task) => void;
+  loadTasks: (queryConfig: FetchTasksQuery) => void;
   clearSelected: (task?: Task) => void;
 };
 
@@ -25,12 +25,12 @@ export const useTasks = () => {
 };
 
 export const TasksContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const { tasks, getAll, update, create } = useTaskService();
+  const { tasks, getAll, update, create, remove } = useTaskService();
   const [selectedTask, setSelectedTask] = useState<Task>(); // TODO Implementar teste automatizado para garantir valor vazio quando necessario
 
   const loadTasks = useCallback(
-    (filter: FetchTasksQuery) => {
-      getAll(filter);
+    (queryConfig: FetchTasksQuery) => {
+      getAll(queryConfig);
       clearSelected();
     },
     [getAll]
@@ -46,8 +46,9 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
     clearSelected();
   };
 
-  const deleteTask = () => {
-    clearSelected(); // TODO Implementar deleção
+  const deleteTask = (task: Task) => {
+    remove(task);
+    clearSelected();
   };
 
   const selectTask = (task?: Task) => {

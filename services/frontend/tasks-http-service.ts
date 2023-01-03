@@ -1,5 +1,5 @@
-import { Task } from "types/Task";
-import type { ILoginCredentials } from "types/User";
+import type { Task } from "types/Task";
+
 import { HttpFetchClient } from "./http-fetch-client";
 
 const service = (httpClient: HttpFetchClient<Task>) => {
@@ -30,7 +30,7 @@ const service = (httpClient: HttpFetchClient<Task>) => {
 
   const del = async (task: Task): Promise<Task> => {
     try {
-      return await httpClient.put("/task".concat(`?id=${task._id}`), task);
+      return await httpClient.delete("/task".concat(`?id=${task._id}`));
     } catch (error) {
       throw error;
     }

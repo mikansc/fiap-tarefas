@@ -20,14 +20,17 @@ export const Home: NextPage = () => {
     else setOpened(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = (task: Task) => {
     if (window.confirm("Você quer mesmo deletar a tarefa?")) {
-      deleteTask(); // TODO
+      deleteTask(task);
     }
   };
   const handleSave = (task: Task) => {
     if (isEditing) updateTask(task);
-    else createTask(task);
+    else {
+      createTask(task);
+      setOpened(false);
+    }
   };
 
   const isOpened = opened || !!selectedTask;
