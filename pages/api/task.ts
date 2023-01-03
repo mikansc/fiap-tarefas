@@ -57,12 +57,12 @@ const getTasks = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResp
   } as any;
 
   if (params?.finishPrevisionDateStart) {
-    const inputDate = DateTime.fromISO(params?.finishPrevisionDateStart);
+    const inputDate = DateTime.fromISO(params?.finishPrevisionDateStart, { zone: "utc" });
     query.finishPrevisionDate = { $gte: inputDate.toISO() };
   }
 
   if (params?.finishPrevisionDateEnd) {
-    const lastDate = DateTime.fromISO(params?.finishPrevisionDateEnd);
+    const lastDate = DateTime.fromISO(params?.finishPrevisionDateEnd, { zone: "utc" });
     if (!query.finishPrevisionDate) {
       query.finishPrevisionDate = {};
     }
