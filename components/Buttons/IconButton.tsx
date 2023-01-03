@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import styles from "./IconButton.module.scss";
 
-type Icons = "exit" | "filter" | "close";
+type Icons = "exit" | "filter" | "close" | "show" | "hide";
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconName: Icons;

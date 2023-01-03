@@ -1,14 +1,15 @@
 import type { ReactNode } from "react";
-import type { ILoginCredentials, IUserResponse } from "types/User";
+import type { ILoginCredentials, ISignupCredentials, IUserResponse } from "types/User";
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { loginService } from "services/frontend/login-http-service";
+import { accountService } from "services/frontend/account-http-service";
 import { clearStorage, getFromStorage, setToStorage } from "services/frontend/storage-service";
 
 const initialContext = {
   isLoggedIn: false,
   handleLogin: (credentials: ILoginCredentials) => {},
+  handleRegister: (data: ISignupCredentials) => {},
   user: {} as IUserResponse,
   handleLogout: () => {},
 };
@@ -35,9 +36,18 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   const handleLogin = async (credentials: ILoginCredentials) => {
     try {
-      const response = await loginService.signin(credentials);
+      const response = await accountService.signin(credentials);
       setToStorage("usr", response);
       setUser(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRegister = async (data: ISignupCredentials) => {
+    try {
+      await accountService.signup(data);
+      await handleLogin({ login: data.email, password: data.password });
     } catch (error) {
       console.log(error);
     }
@@ -48,5 +58,5 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     setUser({} as IUserResponse);
   };
 
-  return <AuthProvider value={{ isLoggedIn, handleLogin, handleLogout, user }}>{children}</AuthProvider>;
+  return <AuthProvider value={{ isLoggedIn, handleLogin, handleLogout, handleRegister, user }}>{children}</AuthProvider>;
 };

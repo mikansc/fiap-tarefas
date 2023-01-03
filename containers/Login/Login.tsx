@@ -1,19 +1,23 @@
+import type { ILoginCredentials } from "types/User";
+
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
-import { Button, TextField } from "components";
-
-import styles from "./Login.module.scss";
 import { useForm } from "hooks/useForm";
 import { useAuth } from "contexts/authContext";
-import type { ILoginCredentials } from "types/User";
+
+import { Button, PasswordField, TextField } from "components";
+
+import styles from "./Login.module.scss";
 
 export const Login: NextPage = () => {
   const { registerField, formValues } = useForm<ILoginCredentials>();
   const { handleLogin } = useAuth();
+  const router = useRouter();
 
   const authenticate = () => {
-    handleLogin(formValues);
+    handleLogin(formValues as ILoginCredentials);
   };
 
   return (
@@ -25,14 +29,18 @@ export const Login: NextPage = () => {
           placeholder="email@email.com"
           icon={<Image src="/images/icons/mail-icon.svg" width={22} height={22} alt="Email" />}
         />
-        <TextField
+        <PasswordField
           {...registerField("password")}
           placeholder="senha"
+          type="password"
           icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Email" />}
         />
         <div className={styles.buttonContainer}>
           <Button fullWidth onClick={authenticate}>
             Login
+          </Button>
+          <Button fullWidth onClick={() => router.push("/signin")} variant="text">
+            Criar uma nova conta
           </Button>
         </div>
       </div>
