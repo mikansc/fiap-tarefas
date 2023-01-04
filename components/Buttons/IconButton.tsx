@@ -11,8 +11,8 @@ interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const IconButton = ({ iconName, ...rest }: IconButtonProps) => {
   return (
-    <button {...rest} className={styles.button}>
-      <Image src={`/images/icons/${iconName}-icon.svg`} alt="Icon" width={24} height={24} />
+    <button {...rest} className={styles.button} type="button">
+      <Image src={`/images/icons/${iconName}-icon.svg`} alt={`${iconName} icon`} width={24} height={24} />
     </button>
   );
 };
