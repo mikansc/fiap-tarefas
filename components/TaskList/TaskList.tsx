@@ -1,12 +1,9 @@
-import { useTasks } from "contexts/tasksContext";
-import { useState } from "react";
-import { Task } from "types/Task";
-import { TaskItem } from "./TaskItem";
-import styles from "./TaskList.module.scss";
+import type { TaskListProps } from "./TaskList.types";
 
-interface TaskListProps {
-  tasks: Task[];
-}
+import { useTasks } from "contexts/tasksContext";
+import { TaskItem } from "./TaskItem";
+
+import styles from "./TaskList.module.scss";
 
 export const TaskList = ({ tasks }: TaskListProps) => {
   const { selectTask, selectedTask } = useTasks();

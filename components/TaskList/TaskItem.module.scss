@@ -15,18 +15,23 @@
   border: 1px solid transparent;
   border-radius: 12px;
 
-  & svg > circle {
+  cursor: pointer;
+}
+
+.taskStatus {
+  border: none;
+  margin-right: 2rem;
+
+  & > svg {
     stroke: $darkGreyColor;
-    &.doneIcon {
+    & > circle {
+      stroke: $darkGreyColor;
       fill: $darkGreyColor;
     }
+    & path {
+      stroke: white;
+    }
   }
-
-  & svg > path {
-    stroke: white;
-  }
-
-  cursor: pointer;
 }
 
 .selected {
@@ -34,18 +39,16 @@
   background-color: $lightPrimaryColor;
   border: 1px solid $primaryColor;
 
-  & svg > circle {
+  & *.taskStatus > svg {
     stroke: $primaryColor;
-
-    &.doneIcon {
+    & > circle {
+      stroke: $primaryColor;
       fill: $primaryColor;
     }
+    & path {
+      stroke: white;
+    }
   }
-}
-
-.taskAction {
-  border: none;
-  margin-right: 2rem;
 }
 
 .taskContent {

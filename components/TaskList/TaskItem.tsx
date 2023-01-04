@@ -1,29 +1,27 @@
-import type { Task } from "types/Task";
-import DoneIcon from "./components/DoneIcon";
-import UndoneIcon from "./components/UndoneIcon";
+import type { TaskItemProps } from "./TaskList.types";
+
+import { asLocaleDateString } from "services/shared/date-service";
+
 import styles from "./TaskItem.module.scss";
 
-function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString("pt-BR");
-}
+import { DoneIcon, UndoneIcon } from "components";
 
-interface TaskProps {
-  task: Task;
-  onClick: () => void;
-  seleted: boolean;
-}
+export const TaskItem = (props: TaskItemProps) => {
+  const { task, onClick, seleted } = props;
 
-export const TaskItem = ({ task, onClick, seleted }: TaskProps) => {
   const taskIsDone = !!task.finishDate;
+  const finishedDate = task.finishDate ? asLocaleDateString(task.finishDate) : "-";
+  const dueDate = task.finishPrevisionDate ? asLocaleDateString(task.finishPrevisionDate) : "-";
+
   return (
     <li className={`${styles.container} ${seleted ? styles.selected : ""}`} onClick={onClick}>
-      <div className={styles.taskAction}>{taskIsDone ? <DoneIcon /> : <UndoneIcon />}</div>
+      <div className={`${styles.taskStatus} ${taskIsDone ? styles.taskDone : ""}`}>{taskIsDone ? <DoneIcon /> : <UndoneIcon />}</div>
       <div className={styles.taskContent}>
         <span className={`${styles.taskTitle} ${taskIsDone ? styles.taskDone : ""}`}>{task.name}</span>
         {taskIsDone ? (
-          <span className={styles.taskDue}>Concluída em: {task.finishDate ? formatDate(task.finishDate) : "-"}</span>
+          <span className={styles.taskDue}>Concluída em: {finishedDate}</span>
         ) : (
-          <span className={styles.taskDue}>Conclusão em: {task.finishPrevisionDate ? formatDate(task.finishPrevisionDate) : "-"}</span>
+          <span className={styles.taskDue}>Conclusão em: {dueDate}</span>
         )}
       </div>
     </li>

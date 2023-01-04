@@ -4,3 +4,8 @@ export function asDateString(date: string): string {
   if (!date) return "";
   return DateTime.fromISO(date).toISODate();
 }
+
+export function asLocaleDateString(date: string): string {
+  if (!date) return "";
+  return new Date(date).toLocaleDateString("pt-BR");
+}

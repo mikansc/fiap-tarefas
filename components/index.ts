@@ -1,6 +1,7 @@
 export * from "./Buttons";
 export * from "./Filter";
 export * from "./FooterBar";
+export * from "./Icons";
 export * from "./Inputs";
 export * from "./Label";
 export * from "./Modals";

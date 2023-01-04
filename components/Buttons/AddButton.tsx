@@ -1,6 +1,6 @@
 import type { AddButtonProps } from "./Buttons.types";
 
-import { AddIcon } from "./components/AddIcon";
+import { AddIcon } from "../Icons/AddIcon";
 
 import styles from "./AddButton.module.scss";
 
