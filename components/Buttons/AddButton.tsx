@@ -8,7 +8,7 @@ interface AddButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const AddButton = (props: AddButtonProps) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} role="button">
       <button className={styles.button} {...props}>
         <AddIcon />
         Adicionar uma tarefa

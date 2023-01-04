@@ -23,7 +23,7 @@ export const Login: NextPage = () => {
   return (
     <div className={styles.container}>
       <Image className={styles.logo} src="/images/logo.svg" alt="FIAP Logo" width={180} height={50} />
-      <div className={styles.inputgroup}>
+      <main className={styles.inputgroup}>
         <TextField
           {...registerField("login")}
           placeholder="email@email.com"
@@ -34,15 +34,15 @@ export const Login: NextPage = () => {
           placeholder="senha"
           icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Password" />}
         />
-        <div className={styles.buttonContainer}>
+        <footer className={styles.buttonContainer}>
           <Button fullWidth onClick={authenticate}>
             Login
           </Button>
           <Button fullWidth onClick={() => router.push("/signin")} variant="text">
             Criar uma nova conta
           </Button>
-        </div>
-      </div>
+        </footer>
+      </main>
     </div>
   );
 };

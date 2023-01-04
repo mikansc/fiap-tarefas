@@ -9,7 +9,7 @@ import styles from "./NavBar.module.scss";
 export const NavBar = () => {
   const { handleLogout, user } = useAuth();
   return (
-    <div className={styles.wrapper}>
+    <header className={styles.wrapper}>
       <div className={styles.container}>
         <Image src="/images/logo.svg" width={90} height={24} alt="FIAP Tarefas - Logo" />
         <span className={styles.username}>
@@ -17,6 +17,6 @@ export const NavBar = () => {
           <IconButton iconName="exit" onClick={handleLogout} />
         </span>
       </div>
-    </div>
+    </header>
   );
 };

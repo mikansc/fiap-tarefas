@@ -9,9 +9,9 @@ export const Filter = () => {
   const isMobile = useIsMobile();
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <span className={styles.title}>Tarefas</span>
       {isMobile ? <MobileViewFilters /> : <DesktopViewFilters />}
-    </div>
+    </section>
   );
 };

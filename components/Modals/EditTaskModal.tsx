@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { useForm } from "hooks/useForm";
 import { asDateString } from "services/shared/date-service";
-import { dateFieldConfig } from "./utils/date-field-config";
+import { dateFieldConfig } from "../Filter/utils/date-field-config";
 
 import { ModalWrapper } from "./ModalWrapper";
 import { Button, DateField, TextField, IconButton } from "components";
@@ -62,8 +62,10 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
 
   return (
     <ModalWrapper open={open}>
-      <div className={styles.modalContent}>
-        <h2 className={styles.title}>{isEditing ? "Editar" : "Nova"} tarefa</h2>
+      <div className={styles.modalContent} role="dialog" aria-labelledby="edit_modal_title">
+        <h2 id="edit_modal_title" className={styles.title}>
+          {isEditing ? "Editar" : "Nova"} tarefa
+        </h2>
         <div className={styles.closeBtn}>{renderCloseButton()}</div>
         <TextField {...registerField("name")} label="Título da tarefa" variant="outlined" fullWidth placeholder="Título da tarefa" />
         {renderDateField()}

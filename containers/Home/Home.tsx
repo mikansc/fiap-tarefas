@@ -38,14 +38,14 @@ export const Home: NextPage = () => {
   return (
     <>
       <NavBar />
-      <div className={styles.container}>
+      <main className={styles.container}>
         <Filter />
-        <div className={styles.tasks}>
+        <section className={styles.tasks}>
           {tasks.length == 0 && <NoContent />}
           {tasks.length > 0 && <TaskList tasks={tasks} />}
-        </div>
+        </section>
         <AddButton onClick={() => setOpened(true)} />
-      </div>
+      </main>
       <FooterBar />
       <EditTaskModal task={selectedTask} open={isOpened} onCancel={handleCancel} onDelete={handleDelete} onSave={handleSave} />
     </>

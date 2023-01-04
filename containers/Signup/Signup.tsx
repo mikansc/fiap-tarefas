@@ -49,7 +49,7 @@ export const Signup: NextPage = () => {
   return (
     <div className={styles.container}>
       <Image className={styles.logo} src="/images/logo.svg" alt="FIAP" width={180} height={50} />
-      <div className={styles.inputgroup}>
+      <main className={styles.inputgroup}>
         <h2 className={styles.title}>Novo Usuário</h2>
         <TextField
           {...registerField("name")}
@@ -71,15 +71,15 @@ export const Signup: NextPage = () => {
           placeholder="confirmar senha"
           icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Confirm password" />}
         />
-        <div className={styles.buttonContainer}>
+        <footer className={styles.buttonContainer}>
           <Button fullWidth onClick={createAccount}>
             Cadastrar
           </Button>
           <Button fullWidth onClick={() => router.push("/")} variant="text">
             Voltar para o login
           </Button>
-        </div>
-      </div>
+        </footer>
+      </main>
     </div>
   );
 };

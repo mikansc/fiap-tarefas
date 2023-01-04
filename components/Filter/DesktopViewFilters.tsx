@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { useForm } from "hooks/useForm";
 import { useTasks } from "contexts/tasksContext";
-import { dateFieldConfig } from "components/Modals/utils/date-field-config";
+import { dateFieldConfig } from "components/Filter/utils/date-field-config";
 
 import { DateField, Label, SelectField } from "components";
 
@@ -38,7 +38,7 @@ export function DesktopViewFilters() {
       <DateField {...registerField("startDate", dateFieldConfig)} id="date-from" />
       <Label htmlFor="date-to">até:</Label>
       <DateField {...registerField("finalDate", dateFieldConfig)} id="date-to" />
-      <div className={styles.divider}></div>
+      <div className={styles.divider} role="separator"></div>
       <Label htmlFor="status">Status:</Label>
       <SelectField {...registerField("status")} id="status" options={selectOptions} />
     </div>

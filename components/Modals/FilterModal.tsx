@@ -1,7 +1,7 @@
 import type { FetchTasksQuery } from "hooks/useTaskService";
 
 import { useForm } from "hooks/useForm";
-import { dateFieldConfig } from "./utils/date-field-config";
+import { dateFieldConfig } from "../Filter/utils/date-field-config";
 
 import { ModalWrapper } from "./ModalWrapper";
 import { SelectField, Button, DateField } from "components";
@@ -35,15 +35,19 @@ export const FilterModal = ({ open, onCancel, onApply }: FilterModalProps) => {
 
   return (
     <ModalWrapper open={open}>
-      <h2 className={styles.title}>Filtrar tarefas</h2>
-      <DateField {...registerField("startDate", dateFieldConfig)} label="Data de conclusão inicial" fullWidth />
-      <DateField {...registerField("finalDate", dateFieldConfig)} label="Data de conclusão final" fullWidth />
-      <SelectField {...registerField("status")} label="Status" fullWidth options={selectOptions} />
-      <div className={styles.actionGroup}>
-        <Button onClick={handleOnApplyFilters}>Aplicar filtros</Button>
-        <Button variant="text" onClick={onCancel}>
-          Cancelar
-        </Button>
+      <div role="dialog" aria-labelledby="filter_modal_title">
+        <h2 id="filter_modal_title" className={styles.title}>
+          Filtrar tarefas
+        </h2>
+        <DateField {...registerField("startDate", dateFieldConfig)} label="Data de conclusão inicial" fullWidth />
+        <DateField {...registerField("finalDate", dateFieldConfig)} label="Data de conclusão final" fullWidth />
+        <SelectField {...registerField("status")} label="Status" fullWidth options={selectOptions} />
+        <div className={styles.actionGroup}>
+          <Button onClick={handleOnApplyFilters}>Aplicar filtros</Button>
+          <Button variant="text" onClick={onCancel}>
+            Cancelar
+          </Button>
+        </div>
       </div>
     </ModalWrapper>
   );
