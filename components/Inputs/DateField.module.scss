@@ -1,1 +1,5 @@
-// @import "styles/config.scss";
+@import "./mixins/input_base.scss";
+
+.textfield {
+  @include input_base;
+}
