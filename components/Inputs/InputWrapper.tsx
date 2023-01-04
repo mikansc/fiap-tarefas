@@ -1,12 +1,6 @@
+import type { InputWrapperProps } from "./Inputs.types";
+
 import styles from "./InputWrapper.module.scss";
-
-export type InputVariants = "default" | "outlined";
-
-interface InputWrapperProps {
-  fullWidth: boolean;
-  variant: InputVariants;
-  children: React.ReactNode;
-}
 
 export const InputWrapper = (props: InputWrapperProps) => {
   const { variant = "default", fullWidth, children } = props;

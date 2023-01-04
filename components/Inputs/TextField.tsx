@@ -1,5 +1,4 @@
-import type { ForwardedRef, InputHTMLAttributes } from "react";
-import type { InputVariants } from "components/Inputs";
+import type { TextInputWithIconProps } from "./Inputs.types";
 
 import { forwardRef } from "react";
 
@@ -7,14 +6,7 @@ import { InputWrapper, Label } from "components";
 
 import styles from "./TextField.module.scss";
 
-interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  icon?: React.ReactNode;
-  fullWidth?: boolean;
-  variant?: InputVariants;
-  label?: string;
-}
-
-export const TextField = forwardRef((props: TextFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
+export const TextField = forwardRef<HTMLInputElement, TextInputWithIconProps>((props, ref) => {
   const { icon, fullWidth = false, label, variant = "default", id, ...rest } = props;
 
   return (

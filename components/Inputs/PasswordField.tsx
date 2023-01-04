@@ -1,5 +1,4 @@
-import type { ForwardedRef, InputHTMLAttributes } from "react";
-import type { InputVariants } from "components/Inputs";
+import type { TextInputWithIconProps } from "./Inputs.types";
 
 import { forwardRef, useState } from "react";
 
@@ -7,14 +6,7 @@ import { IconButton, InputWrapper, Label } from "components";
 
 import styles from "./PasswordField.module.scss";
 
-interface PasswordField extends InputHTMLAttributes<HTMLInputElement> {
-  icon?: React.ReactNode;
-  fullWidth?: boolean;
-  variant?: InputVariants;
-  label?: string;
-}
-
-export const PasswordField = forwardRef((props: PasswordField, ref: ForwardedRef<HTMLInputElement>) => {
+export const PasswordField = forwardRef<HTMLInputElement, TextInputWithIconProps>((props, ref) => {
   const [show, setShow] = useState(false);
 
   const { icon, fullWidth = false, label, variant = "default", id, ...rest } = props;

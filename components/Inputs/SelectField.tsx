@@ -1,24 +1,12 @@
-import type { SelectHTMLAttributes } from "react";
-import type { InputVariants } from "components/Inputs";
+import type { SelectFieldProps } from "./Inputs.types";
 
 import { forwardRef } from "react";
 
 import { InputWrapper, Label } from "components";
 
-type OptionItem = {
-  label: string;
-  value: string | number;
-};
-
-interface SelectFieldProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  options: OptionItem[];
-  fullWidth?: boolean;
-  variant?: InputVariants;
-  label?: string;
-}
-
 export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>((props, ref) => {
   const { options, label, variant = "outlined", fullWidth = true, id, ...rest } = props;
+
   return (
     <InputWrapper fullWidth={fullWidth} variant={variant}>
       {label && <Label htmlFor={id}>{label}</Label>}

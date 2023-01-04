@@ -1,5 +1,4 @@
-import type { ForwardedRef, InputHTMLAttributes } from "react";
-import type { InputVariants } from "components/Inputs";
+import type { TextInputProps } from "./Inputs.types";
 
 import { forwardRef } from "react";
 
@@ -7,13 +6,7 @@ import { InputWrapper, Label } from "components";
 
 import styles from "./DateField.module.scss";
 
-interface DateFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  fullWidth?: boolean;
-  variant?: InputVariants;
-  label?: string;
-}
-
-export const DateField = forwardRef((props: DateFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
+export const DateField = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
   const { label, fullWidth = false, variant = "outlined", id, ...rest } = props;
 
   return (
