@@ -1,10 +1,8 @@
-import { ButtonHTMLAttributes } from "react";
+import type { AddButtonProps } from "./Buttons.types";
 
 import { AddIcon } from "./components/AddIcon";
 
 import styles from "./AddButton.module.scss";
-
-interface AddButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const AddButton = (props: AddButtonProps) => {
   return (

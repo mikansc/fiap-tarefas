@@ -1,12 +1,6 @@
-import React, { ButtonHTMLAttributes } from "react";
+import type { ButtonProps } from "./Buttons.types";
 
 import styles from "./Button.module.scss";
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  fullWidth?: boolean;
-  variant?: "text" | "outlined";
-}
 
 export const Button = ({ children, variant = "outlined", fullWidth = false, ...rest }: ButtonProps) => {
   return (

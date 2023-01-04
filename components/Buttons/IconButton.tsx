@@ -1,13 +1,8 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { IconButtonProps } from "./Buttons.types";
+
 import Image from "next/image";
 
 import styles from "./IconButton.module.scss";
-
-type Icons = "exit" | "filter" | "close" | "show" | "hide";
-
-interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  iconName: Icons;
-}
 
 export const IconButton = ({ iconName, ...rest }: IconButtonProps) => {
   return (
