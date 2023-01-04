@@ -16,7 +16,7 @@ interface TaskProps {
 export const TaskItem = ({ task, onClick, seleted }: TaskProps) => {
   const taskIsDone = !!task.finishDate;
   return (
-    <div className={`${styles.container} ${seleted ? styles.selected : ""}`} onClick={onClick}>
+    <li className={`${styles.container} ${seleted ? styles.selected : ""}`} onClick={onClick}>
       <div className={styles.taskAction}>{taskIsDone ? <DoneIcon /> : <UndoneIcon />}</div>
       <div className={styles.taskContent}>
         <span className={`${styles.taskTitle} ${taskIsDone ? styles.taskDone : ""}`}>{task.name}</span>
@@ -26,6 +26,6 @@ export const TaskItem = ({ task, onClick, seleted }: TaskProps) => {
           <span className={styles.taskDue}>Conclusão em: {task.finishPrevisionDate ? formatDate(task.finishPrevisionDate) : "-"}</span>
         )}
       </div>
-    </div>
+    </li>
   );
 };
