@@ -12,4 +12,8 @@
   flex-direction: column;
   row-gap: 10px;
   overflow-y: auto;
+
+  & > :last-child {
+    margin-bottom: 4.5rem;
+  }
 }
