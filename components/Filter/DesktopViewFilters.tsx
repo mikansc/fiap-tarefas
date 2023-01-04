@@ -4,17 +4,12 @@ import { useEffect } from "react";
 
 import { useForm } from "hooks/useForm";
 import { useTasks } from "contexts/tasksContext";
+import { selectOptions } from "./utils/filter-select-options";
 import { dateFieldConfig } from "components/Filter/utils/date-field-config";
 
 import { DateField, Label, SelectField } from "components";
 
 import styles from "./Filter.module.scss";
-
-const selectOptions = [
-  { label: "Todas", value: 0 },
-  { label: "Não finalizadas", value: 1 },
-  { label: "Finalizadas", value: 2 },
-];
 
 export function DesktopViewFilters() {
   const { registerField, formValues } = useForm<FetchTasksQuery>();

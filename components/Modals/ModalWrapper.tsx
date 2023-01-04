@@ -1,13 +1,12 @@
+import type { ModalProps } from "./Modals.types";
+
 import ReactDOM from "react-dom";
 
 import styles from "./ModalWrapper.module.scss";
 
-type ModalProps = {
-  children: React.ReactNode;
-  open: boolean;
-};
+export const ModalWrapper = (props: ModalProps) => {
+  const { children, open = true } = props;
 
-export const ModalWrapper = ({ children, open = true }: ModalProps) => {
   if (!open) return null;
 
   return ReactDOM.createPortal(

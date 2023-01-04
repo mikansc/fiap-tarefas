@@ -1,3 +1,4 @@
+import type { EditTaskModalProps } from "./Modals.types";
 import type { Task } from "types/Task";
 
 import { useEffect } from "react";
@@ -11,16 +12,9 @@ import { Button, DateField, TextField, IconButton } from "components";
 
 import styles from "./EditTaskModal.module.scss";
 
-type EditTaskModalProps = {
-  open: boolean;
-  task?: Task;
-  onCancel: () => void;
-  onDelete: (task: Task) => void;
-  onSave: (task: Task) => void;
-};
-
 export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTaskModalProps) => {
   const { setValues, registerField, formValues, clearForm } = useForm<Task>();
+
   const isEditing = !!task;
 
   useEffect(() => {
