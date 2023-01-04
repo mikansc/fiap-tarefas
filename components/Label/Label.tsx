@@ -1,10 +1,8 @@
-import { LabelHTMLAttributes, PropsWithChildren } from "react";
+import type { LabelProps } from "./Label.types";
 
 import styles from "./Label.module.scss";
 
-interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
-
-export const Label = (props: PropsWithChildren<LabelProps>) => {
+export const Label = (props: LabelProps) => {
   const { children, htmlFor, ...rest } = props;
 
   return (
