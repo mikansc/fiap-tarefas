@@ -22,17 +22,17 @@ export const Login: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <Image className={styles.logo} src="/images/logo.svg" alt="FIAP" width={180} height={50} />
+      <Image className={styles.logo} src="/images/logo.svg" alt="FIAP Logo" width={180} height={50} />
       <div className={styles.inputgroup}>
         <TextField
           {...registerField("login")}
           placeholder="email@email.com"
-          icon={<Image src="/images/icons/mail-icon.svg" width={22} height={22} alt="Email" />}
+          icon={<Image src="/images/icons/mail-icon.svg" width={22} height={22} alt="E-mail address" />}
         />
         <PasswordField
           {...registerField("password")}
           placeholder="senha"
-          icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Email" />}
+          icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Password" />}
         />
         <div className={styles.buttonContainer}>
           <Button fullWidth onClick={authenticate}>

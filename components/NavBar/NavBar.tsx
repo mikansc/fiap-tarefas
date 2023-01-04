@@ -11,7 +11,7 @@ export const NavBar = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <Image src="/images/logo.svg" width={90} height={24} alt="Logo" />
+        <Image src="/images/logo.svg" width={90} height={24} alt="FIAP Tarefas - Logo" />
         <span className={styles.username}>
           Olá, {user.name}
           <IconButton iconName="exit" onClick={handleLogout} />
