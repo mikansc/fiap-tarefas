@@ -1,7 +1,7 @@
 import type { Task } from "types/Task";
+import type { NextPage } from "next";
 
 import { useState } from "react";
-import { NextPage } from "next";
 
 import { useTasks } from "contexts/tasksContext";
 

@@ -1,16 +1,15 @@
+import type { NextPage } from "next";
 import type { ISignupCredentials } from "types/User";
 
-import { NextPage } from "next";
-import { useRouter } from "next/router";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
+import { useForm } from "hooks/useForm";
+import { useAuth } from "contexts/authContext";
 
 import { Button, PasswordField, TextField } from "components";
 
-import { useForm } from "hooks/useForm";
-
 import styles from "./Signup.module.scss";
-import { useAuth } from "contexts/authContext";
-import { useEffect } from "react";
 
 interface SignupForm extends ISignupCredentials {
   "password-confirm": string;

@@ -1,8 +1,8 @@
 import type { ILoginCredentials } from "types/User";
+import type { NextPage } from "next";
 
-import { NextPage } from "next";
-import { useRouter } from "next/router";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { useForm } from "hooks/useForm";
 import { useAuth } from "contexts/authContext";
