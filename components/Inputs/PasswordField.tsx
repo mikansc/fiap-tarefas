@@ -1,12 +1,11 @@
-import { ForwardedRef, InputHTMLAttributes, useState } from "react";
+import type { ForwardedRef, InputHTMLAttributes } from "react";
 import type { InputVariants } from "components/Inputs";
 
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 
 import { IconButton, InputWrapper, Label } from "components";
 
 import styles from "./PasswordField.module.scss";
-import Image from "next/image";
 
 interface PasswordField extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;

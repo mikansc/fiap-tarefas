@@ -24,7 +24,11 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
   const isEditing = !!task;
 
   useEffect(() => {
-    if (isEditing) setValues({ ...task, finishDate: asDateString(task.finishDate!), finishPrevisionDate: asDateString(task.finishPrevisionDate) });
+    if (isEditing) {
+      const finishDate = asDateString(task.finishDate || "");
+      const finishPrevisionDate = asDateString(task.finishPrevisionDate);
+      setValues({ ...task, finishDate, finishPrevisionDate });
+    }
   }, [isEditing, setValues, task]);
 
   const handleCancelOperation = () => {
@@ -61,14 +65,7 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
       <div className={styles.modalContent}>
         <h2 className={styles.title}>{isEditing ? "Editar" : "Nova"} tarefa</h2>
         <div className={styles.closeBtn}>{renderCloseButton()}</div>
-        <TextField
-          {...registerField("name")}
-          label="Título da tarefa"
-          variant="outlined"
-          fullWidth
-          placeholder="Título da tarefa"
-          id="titulo-tarefa"
-        />
+        <TextField {...registerField("name")} label="Título da tarefa" variant="outlined" fullWidth placeholder="Título da tarefa" />
         {renderDateField()}
         <div className={styles.actionGroup}>
           <Button onClick={() => onSave(formValues as Task)}>Salvar alterações</Button>

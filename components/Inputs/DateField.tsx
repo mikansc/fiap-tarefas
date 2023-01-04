@@ -17,7 +17,7 @@ export const DateField = forwardRef((props: DateFieldProps, ref: ForwardedRef<HT
   return (
     <InputWrapper fullWidth={fullWidth} variant={variant}>
       {label && <Label htmlFor={id}>{label}</Label>}
-      <input type="date" {...rest} id={id} ref={ref} />
+      <input {...rest} id={id} ref={ref} type="date" />
     </InputWrapper>
   );
 });

@@ -32,7 +32,6 @@ export const Login: NextPage = () => {
         <PasswordField
           {...registerField("password")}
           placeholder="senha"
-          type="password"
           icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Email" />}
         />
         <div className={styles.buttonContainer}>

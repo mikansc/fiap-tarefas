@@ -41,9 +41,8 @@ export const Signup: NextPage = () => {
       return alert("Você precisa confirmar a senha");
     }
     if (formValues["password"] != formValues["password-confirm"]) {
-      return alert("A senha ea  confirmação de senha não são iguais");
+      return alert("A senha e a  confirmação de senha não são iguais");
     }
-
     handleRegister({ email, password, name });
   };
 
@@ -55,24 +54,22 @@ export const Signup: NextPage = () => {
         <TextField
           {...registerField("name")}
           placeholder="Seu nome completo"
-          icon={<Image src="/images/icons/id-icon.svg" width={22} height={22} alt="Email" />}
+          icon={<Image src="/images/icons/id-icon.svg" width={22} height={22} alt="Full name" />}
         />
         <TextField
           {...registerField("email")}
           placeholder="seu_email@email.com"
-          icon={<Image src="/images/icons/mail-icon.svg" width={22} height={22} alt="Email" />}
+          icon={<Image src="/images/icons/mail-icon.svg" width={22} height={22} alt="E-mail address" />}
         />
         <PasswordField
           {...registerField("password")}
           placeholder="senha"
-          type="password"
-          icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Email" />}
+          icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Password" />}
         />
         <PasswordField
           {...registerField("password-confirm")}
           placeholder="confirmar senha"
-          type="password"
-          icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Email" />}
+          icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Confirm password" />}
         />
         <div className={styles.buttonContainer}>
           <Button fullWidth onClick={createAccount}>
