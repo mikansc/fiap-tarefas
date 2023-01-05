@@ -145,6 +145,8 @@ const updateTask = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgRe
 
     if (task.finishDate) {
       taskFound.finishDate = task.finishDate;
+    } else {
+      taskFound.finishDate = null;
     }
 
     await TaskModel.findByIdAndUpdate({ _id: taskFound._id }, taskFound);
