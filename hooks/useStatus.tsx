@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type StatusTypes = "idle" | "loading" | "success" | "error";
+export type StatusTypes = "idle" | "loading" | "success" | "error";
 
 type UseStatus = {
   status: StatusTypes;
