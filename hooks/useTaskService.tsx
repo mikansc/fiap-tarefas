@@ -3,6 +3,7 @@ import type { Task } from "types/Task";
 import { useCallback, useEffect, useState } from "react";
 
 import { tasksService } from "services/frontend/tasks-http-service";
+import { logger } from "services/shared/logger-service";
 
 export type FetchTasksQuery = {
   startDate: string;
@@ -30,7 +31,7 @@ export const useTaskService = () => {
       const tasks = await tasksService.getAll(query);
       setTasks(tasks);
     } catch (error) {
-      console.log(error);
+      logger("error", "front", `useTaskService.getAll error: ${error}`);
     }
   }, []);
 
@@ -40,7 +41,7 @@ export const useTaskService = () => {
         await tasksService.create(task);
         getAll({} as FetchTasksQuery);
       } catch (error) {
-        console.log(error);
+        logger("error", "front", `useTaskService.create error: ${error}`);
       }
     },
     [getAll]
@@ -52,7 +53,7 @@ export const useTaskService = () => {
         await tasksService.update(task);
         getAll({} as FetchTasksQuery);
       } catch (error) {
-        console.log(error);
+        logger("error", "front", `useTaskService.update error: ${error}`);
       }
     },
     [getAll]
@@ -64,7 +65,7 @@ export const useTaskService = () => {
         await tasksService.delete(task);
         getAll({} as FetchTasksQuery);
       } catch (error) {
-        console.log(error);
+        logger("error", "front", `useTaskService.remove error: ${error}`);
       }
     },
     [getAll]

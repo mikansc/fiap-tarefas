@@ -2,9 +2,10 @@ import type { ILoginCredentials, ISignupCredentials, IUserResponse } from "types
 
 import { createContext, useContext } from "react";
 
+import { useStatus } from "hooks/useStatus";
 import { useAuthService } from "hooks/useAuthService";
-import { accountService } from "services/frontend/account-http-service";
 import { useAccountService } from "hooks/useAccountService";
+import { logger } from "services/shared/logger-service";
 
 const initialContext = {
   isLoggedIn: false,
@@ -27,15 +28,28 @@ export const useAuth = () => {
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const { signup } = useAccountService();
   const { authenticate, logout, user } = useAuthService();
+  const status = useStatus();
 
   const isLoggedIn = Boolean(user.token && user.name && user.email);
 
   const handleLogin = async (credentials: ILoginCredentials) => {
-    await authenticate(credentials);
+    try {
+      status.setStatusLoading();
+      await authenticate(credentials);
+      status.setStatusSuccess();
+    } catch (error) {
+      status.setStatusError();
+    }
   };
 
   const handleLogout = async () => {
-    await logout();
+    try {
+      status.setStatusLoading();
+      await logout();
+      status.setStatusSuccess();
+    } catch (error) {
+      status.setStatusError();
+    }
   };
 
   const handleRegister = async (data: ISignupCredentials) => {
@@ -43,7 +57,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       await signup(data);
       await handleLogin({ login: data.email, password: data.password });
     } catch (error) {
-      console.log(error);
+      logger("error", "front", `AuthContextProvider.handleRegister error: ${error}`);
     }
   };
 

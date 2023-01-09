@@ -2,6 +2,7 @@ import type { ILoginCredentials, IUserResponse } from "types/User";
 
 import { useState, useCallback, useEffect } from "react";
 
+import { logger } from "services/shared/logger-service";
 import { authService } from "services/frontend/auth-http-service";
 import { clearStorage, getFromStorage, setToStorage } from "services/frontend/storage-service";
 
@@ -19,7 +20,7 @@ export const useAuthService = () => {
       setToStorage("usr", response);
       setUser(response);
     } catch (error) {
-      console.log(error);
+      logger("error", "front", `useAuthService.authenticate error: ${error}`);
     }
   }, []);
 
