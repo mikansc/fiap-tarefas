@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgRespo
     const savedPassword = bytes.toString(CryptoJs.enc.Utf8);
 
     if (password !== savedPassword) {
-      return res.status(500).json({ message: "Usuário ou senha inválidos." });
+      return res.status(500).json({ error: "Usuário ou senha inválidos." });
     }
 
     const token = jwt.sign({ _id: user._id }, MY_SECRET_KEY);
