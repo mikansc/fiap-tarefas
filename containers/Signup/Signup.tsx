@@ -19,7 +19,7 @@ interface SignupForm extends ISignupCredentials {
 export const Signup: NextPage = () => {
   const { registerField, formValues } = useForm<SignupForm>();
   const router = useRouter();
-  const { handleRegister, isLoggedIn } = useAuth();
+  const { handleRegister, isLoggedIn, isLoading } = useAuth();
 
   if (isLoggedIn) router.push("/");
 
@@ -52,30 +52,34 @@ export const Signup: NextPage = () => {
       <main className={styles.inputgroup}>
         <h2 className={styles.title}>Novo Usuário</h2>
         <TextField
+          disabled={isLoading}
           {...registerField("name")}
           placeholder="Seu nome completo"
           icon={<Image src="/images/icons/id-icon.svg" width={22} height={22} alt="Full name" />}
         />
         <TextField
+          disabled={isLoading}
           {...registerField("email")}
           placeholder="seu_email@email.com"
           icon={<Image src="/images/icons/mail-icon.svg" width={22} height={22} alt="E-mail address" />}
         />
         <PasswordField
+          disabled={isLoading}
           {...registerField("password")}
           placeholder="senha"
           icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Password" />}
         />
         <PasswordField
+          disabled={isLoading}
           {...registerField("password-confirm")}
           placeholder="confirmar senha"
           icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Confirm password" />}
         />
         <footer className={styles.buttonContainer}>
-          <Button fullWidth onClick={createAccount}>
+          <Button disabled={isLoading} fullWidth onClick={createAccount}>
             Cadastrar
           </Button>
-          <Button fullWidth onClick={() => router.push("/")} variant="text">
+          <Button disabled={isLoading} fullWidth onClick={() => router.push("/")} variant="text">
             Voltar para o login
           </Button>
         </footer>

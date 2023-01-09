@@ -13,7 +13,7 @@ import styles from "./Login.module.scss";
 
 export const Login: NextPage = () => {
   const { registerField, formValues } = useForm<ILoginCredentials>();
-  const { handleLogin } = useAuth();
+  const { handleLogin, isLoading } = useAuth();
   const router = useRouter();
 
   const authenticate = () => {
@@ -25,20 +25,22 @@ export const Login: NextPage = () => {
       <Image className={styles.logo} src="/images/logo.svg" alt="FIAP Logo" width={180} height={50} />
       <main className={styles.inputgroup}>
         <TextField
+          disabled={isLoading}
           {...registerField("login")}
           placeholder="email@email.com"
           icon={<Image src="/images/icons/mail-icon.svg" width={22} height={22} alt="E-mail address" />}
         />
         <PasswordField
+          disabled={isLoading}
           {...registerField("password")}
           placeholder="senha"
           icon={<Image src="/images/icons/lock-icon.svg" width={22} height={22} alt="Password" />}
         />
         <footer className={styles.buttonContainer}>
-          <Button fullWidth onClick={authenticate}>
+          <Button disabled={isLoading} fullWidth onClick={authenticate}>
             Login
           </Button>
-          <Button fullWidth onClick={() => router.push("/signin")} variant="text">
+          <Button disabled={isLoading} fullWidth onClick={() => router.push("/signin")} variant="text">
             Criar uma nova conta
           </Button>
         </footer>
