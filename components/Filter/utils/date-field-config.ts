@@ -1,3 +1,3 @@
-import { asDateString } from "services/shared/date-service";
+import { asIsoDateString } from "services/shared/date-service";
 
-export const dateFieldConfig = { change: true, blur: true, mutate: asDateString };
+export const dateFieldConfig = { change: true, blur: true, mutate: asIsoDateString };

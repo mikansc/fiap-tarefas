@@ -4,7 +4,7 @@ import type { Task } from "types/Task";
 import { useEffect } from "react";
 
 import { useForm } from "hooks/useForm";
-import { asDateString } from "services/shared/date-service";
+import { asIsoDateString } from "services/shared/date-service";
 import { dateFieldConfig } from "../Filter/utils/date-field-config";
 
 import { ModalWrapper } from "./ModalWrapper";
@@ -23,8 +23,8 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
 
   useEffect(() => {
     if (isEditing) {
-      const finishDate = asDateString(task.finishDate || "");
-      const finishPrevisionDate = asDateString(task.finishPrevisionDate);
+      const finishDate = asIsoDateString(task.finishDate || "");
+      const finishPrevisionDate = asIsoDateString(task.finishPrevisionDate);
       setValues({ ...task, finishDate, finishPrevisionDate });
     }
   }, [isEditing, setValues, task]);
