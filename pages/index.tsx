@@ -17,7 +17,6 @@ export default function Homepage() {
       ) : (
         <Login />
       )}
-      <ToastContainer position={"bottom-center"} theme="colored" pauseOnHover={false} />
     </>
   );
 }

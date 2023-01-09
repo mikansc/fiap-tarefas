@@ -3,6 +3,7 @@ import type { ISignupCredentials } from "types/User";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 import { useForm } from "hooks/useForm";
 import { useAuth } from "contexts/authContext";
@@ -28,19 +29,19 @@ export const Signup: NextPage = () => {
     const password = formValues["password"];
 
     if (!name) {
-      return alert("Informe o seu nome");
+      return toast.warning("Informe o seu nome");
     }
     if (!email) {
-      return alert("Informe o seu email");
+      return toast.warning("Informe o seu email");
     }
     if (!password) {
-      return alert("Informe a senha");
+      return toast.warning("Informe a senha");
     }
     if (!formValues["password-confirm"]) {
-      return alert("Você precisa confirmar a senha");
+      return toast.warning("Você precisa confirmar a senha");
     }
     if (formValues["password"] != formValues["password-confirm"]) {
-      return alert("A senha e a  confirmação de senha não são iguais");
+      return toast.warning("A senha e a  confirmação de senha não são iguais");
     }
     handleRegister({ email, password, name });
   };
