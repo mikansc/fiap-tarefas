@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  mongo_db:
+    container_name: db_fiap-tarefas
+    image: mongo:latest
+    restart: always
+    volumes:
+      - "data_fiap-tarefas:/data/db"
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=fiap-tarefas
+    networks:
+      - network_fiap-tarefas
+
+  front:
+    container_name: front_fiap-tarefas
+    env_file:
+      - .env
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        CONN_STRING: ${CONN_STRING}
+        SECRECT_KEY: ${SECRECT_KEY}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo_db
+    networks:
+      - network_fiap-tarefas
+
+networks:
+  network_fiap-tarefas:
+volumes:
+  data_fiap-tarefas:

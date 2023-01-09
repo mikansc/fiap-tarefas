@@ -1,0 +1,9 @@
+Dockerfile
+node_modules
+coverage
+dist
+.github
+.git
+.vscode
+.idea
+.next
