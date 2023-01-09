@@ -1,11 +1,10 @@
-import type { ReactNode } from "react";
 import type { ILoginCredentials, ISignupCredentials, IUserResponse } from "types/User";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 
-import { authService } from "services/frontend/auth-http-service";
+import { useAuthService } from "hooks/useAuthService";
 import { accountService } from "services/frontend/account-http-service";
-import { clearStorage, getFromStorage, setToStorage } from "services/frontend/storage-service";
+import { useAccountService } from "hooks/useAccountService";
 
 const initialContext = {
   isLoggedIn: false,
@@ -25,38 +24,27 @@ export const useAuth = () => {
   return ctx;
 };
 
-export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<IUserResponse>({} as IUserResponse);
+export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const { signup } = useAccountService();
+  const { authenticate, logout, user } = useAuthService();
 
   const isLoggedIn = Boolean(user.token && user.name && user.email);
 
-  useEffect(() => {
-    const userFromStorage = getFromStorage<IUserResponse>("usr");
-    if (userFromStorage) setUser(userFromStorage);
-  }, []);
-
   const handleLogin = async (credentials: ILoginCredentials) => {
-    try {
-      const response = await authService.signin(credentials);
-      setToStorage("usr", response);
-      setUser(response);
-    } catch (error) {
-      console.log(error);
-    }
+    await authenticate(credentials);
+  };
+
+  const handleLogout = async () => {
+    await logout();
   };
 
   const handleRegister = async (data: ISignupCredentials) => {
     try {
-      await accountService.signup(data);
+      await signup(data);
       await handleLogin({ login: data.email, password: data.password });
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleLogout = () => {
-    clearStorage();
-    setUser({} as IUserResponse);
   };
 
   return <AuthProvider value={{ isLoggedIn, handleLogin, handleLogout, handleRegister, user }}>{children}</AuthProvider>;
