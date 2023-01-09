@@ -7,6 +7,5 @@ export function asDateString(date: string): string {
 
 export function asLocaleDateString(date: string): string {
   if (!date) return "";
-  // return new Date(date).toLocaleDateString("pt-BR");
-  return DateTime.fromISO(date).toUTC().toFormat("dd/MM/yyyy");
+  return DateTime.fromISO(date, { zone: "utc" }).toFormat("dd/MM/yyyy");
 }
