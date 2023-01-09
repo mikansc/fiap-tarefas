@@ -7,6 +7,7 @@ import { TaskModel } from "../../models/TaskModel";
 import { connectToDB } from "../../middlewares/databases";
 import { jwtValidator } from "../../middlewares/jwt";
 import { DefaultMsgResponse } from "../../types/DefaultMsgResponse";
+import { logger } from "services/shared/logger-service";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResponse | object>) => {
   try {
@@ -31,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgRespo
 
     //
   } catch (e: any) {
-    console.log("Ocorreu um erro ao utilizar o caminho de tarefas:", e);
+    logger("error", "back", `Erro ao utilizar o caminho de tarefas: ${e.message}`);
     res.status(500).json({
       error: "Ocorreu um erro ao utilizar o caminho de tarefas. Tente novamente.",
     });

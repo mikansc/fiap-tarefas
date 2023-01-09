@@ -4,16 +4,12 @@ import { User } from "../../types/User";
 import { connectToDB } from "../../middlewares/databases";
 import { UserModel } from "../../models/UserModel";
 import * as CryptoJs from "crypto-js";
+import { logger } from "services/shared/logger-service";
 
-const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<DefaultMsgResponse>
-) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResponse>) => {
   try {
     if (req.method !== "POST") {
-      return res
-        .status(405)
-        .json({ error: "O método HTTP informado não existe" });
+      return res.status(405).json({ error: "O método HTTP informado não existe" });
     }
 
     const { name, password, email } = req.body as User;
@@ -48,12 +44,10 @@ const handler = async (
 
     return res.status(200).json({ message: "Cadastrado com sucesso" });
   } catch (e: any) {
-    console.log("Ocorreu um erro ao cadastrar usuário:", e);
-    res
-      .status(500)
-      .json({
-        error: "Ocorreu um erro ao cadastrar usuário. Tente novamente.",
-      });
+    logger("error", "back", `Erro ao cadastrar usuário: ${e}`);
+    res.status(500).json({
+      error: "Ocorreu um erro ao cadastrar usuário. Tente novamente.",
+    });
   }
 };
 

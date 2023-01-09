@@ -1,6 +1,7 @@
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import type { DefaultMsgResponse } from "../types/DefaultMsgResponse";
 import * as jwt from "jsonwebtoken";
+import { logger } from "services/shared/logger-service";
 
 export const jwtValidator = (handler: NextApiHandler) => async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResponse>) => {
   const { MY_SECRET_KEY } = process.env;
@@ -38,7 +39,7 @@ export const jwtValidator = (handler: NextApiHandler) => async (req: NextApiRequ
         req.query.userId = decoded._id;
       }
     } catch (e) {
-      console.log("Não foi possível validar o token de acesso:", e);
+      logger("error", "back", `Erro ao validar token: ${e}`);
       res.status(500).json({
         error: "Não foi possível validar o token de acesso. Tente novamente.",
       });

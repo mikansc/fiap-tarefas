@@ -4,11 +4,9 @@ import { connectToDB } from "../../middlewares/databases";
 import { UserModel } from "../../models/UserModel";
 import * as CryptoJs from "crypto-js";
 import * as jwt from "jsonwebtoken";
+import { logger } from "services/shared/logger-service";
 
-const handler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<DefaultMsgResponse | object>
-) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResponse | object>) => {
   try {
     const { MY_SECRET_KEY } = process.env;
     if (!MY_SECRET_KEY) {
@@ -16,9 +14,7 @@ const handler = async (
     }
 
     if (req.method !== "POST") {
-      return res
-        .status(405)
-        .json({ error: "O método HTTP informado não existe" });
+      return res.status(405).json({ error: "O método HTTP informado não existe" });
     }
 
     const { login, password } = req.body;
@@ -50,10 +46,8 @@ const handler = async (
 
     return res.status(200).json(result);
   } catch (e: any) {
-    console.log("Ocorreu um erro ao efetuar o Login:", e);
-    res
-      .status(500)
-      .json({ error: "Ocorreu um erro ao efetuar o login. Tente novamente." });
+    logger("error", "back", `Erro ao efetuar login: ${e}`);
+    res.status(500).json({ error: "Ocorreu um erro ao efetuar o login. Tente novamente." });
   }
 };
 export default connectToDB(handler);
