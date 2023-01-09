@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
 
-export function asDateString(date: string): string {
+export function asIsoDateString(date: string): string {
   if (!date) return "";
-  return DateTime.fromISO(date).toISODate();
+  return DateTime.fromISO(date, { zone: "utc" }).toISODate();
 }
 
 export function asLocaleDateString(date: string): string {
