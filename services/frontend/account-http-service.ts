@@ -2,15 +2,8 @@ import type { ILoginCredentials, ISignupCredentials } from "types/User";
 
 import { HttpFetchClient } from "./http-fetch-client";
 
-const service = (httpClient: HttpFetchClient<ILoginCredentials>) => {
+const service = (httpClient: HttpFetchClient<ISignupCredentials>) => {
   //
-  const signin = async (data: ILoginCredentials) => {
-    try {
-      return await httpClient.post("/login", data);
-    } catch (error) {
-      throw error;
-    }
-  };
 
   const signup = async (data: ISignupCredentials) => {
     try {
@@ -21,7 +14,6 @@ const service = (httpClient: HttpFetchClient<ILoginCredentials>) => {
   };
 
   return {
-    signin,
     signup,
   };
 };

@@ -3,6 +3,7 @@ import type { ILoginCredentials, ISignupCredentials, IUserResponse } from "types
 
 import { createContext, useContext, useEffect, useState } from "react";
 
+import { authService } from "services/frontend/auth-http-service";
 import { accountService } from "services/frontend/account-http-service";
 import { clearStorage, getFromStorage, setToStorage } from "services/frontend/storage-service";
 
@@ -36,7 +37,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   const handleLogin = async (credentials: ILoginCredentials) => {
     try {
-      const response = await accountService.signin(credentials);
+      const response = await authService.signin(credentials);
       setToStorage("usr", response);
       setUser(response);
     } catch (error) {
