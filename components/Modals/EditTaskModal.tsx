@@ -18,6 +18,10 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
   const isEditing = !!task;
 
   useEffect(() => {
+    if (!open) clearForm();
+  }, [open, clearForm]);
+
+  useEffect(() => {
     if (isEditing) {
       const finishDate = asDateString(task.finishDate || "");
       const finishPrevisionDate = asDateString(task.finishPrevisionDate);
@@ -26,7 +30,6 @@ export const EditTaskModal = ({ open, onCancel, onDelete, onSave, task }: EditTa
   }, [isEditing, setValues, task]);
 
   const handleCancelOperation = () => {
-    clearForm();
     onCancel();
   };
 
