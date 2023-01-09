@@ -10,7 +10,7 @@ import { AddButton, EditTaskModal, Filter, FooterBar, NavBar, NoContent, TaskLis
 import styles from "./Home.module.scss";
 
 export const Home: NextPage = () => {
-  const { tasks, selectedTask, deleteTask, clearSelected, updateTask, createTask } = useTasks();
+  const { tasks, selectedTask, deleteTask, clearSelected, updateTask, createTask, isLoading } = useTasks();
   const isEditing = !!selectedTask;
 
   const [opened, setOpened] = useState(false);
@@ -41,6 +41,7 @@ export const Home: NextPage = () => {
       <main className={styles.container}>
         <Filter />
         <section className={styles.tasks}>
+          {isLoading && <p>Carregando...</p>}
           {tasks.length == 0 && <NoContent />}
           {tasks.length > 0 && <TaskList tasks={tasks} />}
         </section>

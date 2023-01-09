@@ -4,6 +4,8 @@ import type { FetchTasksQuery } from "hooks/useTaskService";
 import { createContext, useCallback, useContext, useState } from "react";
 
 import { useTaskService } from "hooks/useTaskService";
+import { useStatus } from "hooks/useStatus";
+import { logger } from "services/shared/logger-service";
 
 type initialContext = {
   tasks: Task[];
@@ -14,6 +16,7 @@ type initialContext = {
   selectTask: (task?: Task) => void;
   loadTasks: (queryConfig: FetchTasksQuery) => void;
   clearSelected: (task?: Task) => void;
+  isLoading: boolean;
 };
 
 const taskContext = createContext({} as initialContext);
@@ -27,28 +30,49 @@ export const useTasks = () => {
 export const TasksContextProvider = ({ children }: { children: React.ReactNode }) => {
   const { tasks, getAll, update, create, remove } = useTaskService();
   const [selectedTask, setSelectedTask] = useState<Task>(); // TODO Implementar teste automatizado para garantir valor vazio quando necessario
+  const { isLoading, setStatusError, setStatusLoading, setStatusSuccess } = useStatus();
 
-  const loadTasks = useCallback(
-    (queryConfig: FetchTasksQuery) => {
+  const loadTasks = (queryConfig: FetchTasksQuery) => {
+    try {
+      setStatusLoading;
       getAll(queryConfig);
       clearSelected();
-    },
-    [getAll]
-  );
-
+      setStatusSuccess();
+    } catch (error) {
+      setStatusError();
+    }
+  };
   const updateTask = (task: Task) => {
-    update(task);
-    clearSelected();
+    try {
+      setStatusLoading;
+      update(task);
+      clearSelected();
+      setStatusSuccess();
+    } catch (error) {
+      setStatusError();
+    }
   };
 
   const createTask = (task: Task) => {
-    create(task);
-    clearSelected();
+    try {
+      setStatusLoading;
+      create(task);
+      clearSelected();
+      setStatusSuccess();
+    } catch (error) {
+      setStatusError();
+    }
   };
 
   const deleteTask = (task: Task) => {
-    remove(task);
-    clearSelected();
+    try {
+      setStatusLoading;
+      remove(task);
+      clearSelected();
+      setStatusSuccess();
+    } catch (error) {
+      setStatusError();
+    }
   };
 
   const selectTask = (task?: Task) => {
@@ -64,6 +88,8 @@ export const TasksContextProvider = ({ children }: { children: React.ReactNode }
   };
 
   return (
-    <TaskProvider value={{ tasks, selectedTask, updateTask, createTask, deleteTask, loadTasks, selectTask, clearSelected }}>{children} </TaskProvider>
+    <TaskProvider value={{ isLoading, tasks, selectedTask, updateTask, createTask, deleteTask, loadTasks, selectTask, clearSelected }}>
+      {children}
+    </TaskProvider>
   );
 };

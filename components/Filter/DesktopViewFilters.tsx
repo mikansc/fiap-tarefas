@@ -13,7 +13,7 @@ import styles from "./Filter.module.scss";
 
 export function DesktopViewFilters() {
   const { registerField, formValues } = useForm<FetchTasksQuery>();
-  const { loadTasks } = useTasks();
+  const { loadTasks, isLoading } = useTasks();
 
   useEffect(() => {
     const finalDate = formValues["finalDate"] as string;
@@ -30,12 +30,12 @@ export function DesktopViewFilters() {
   return (
     <div className={styles.dateFilters}>
       <Label htmlFor="date-from">Data prevista de conclusão:</Label>
-      <DateField {...registerField("startDate", dateFieldConfig)} id="date-from" />
+      <DateField disabled={isLoading} {...registerField("startDate", dateFieldConfig)} id="date-from" />
       <Label htmlFor="date-to">até:</Label>
-      <DateField {...registerField("finalDate", dateFieldConfig)} id="date-to" />
+      <DateField disabled={isLoading} {...registerField("finalDate", dateFieldConfig)} id="date-to" />
       <div className={styles.divider} role="separator"></div>
       <Label htmlFor="status">Status:</Label>
-      <SelectField {...registerField("status")} id="status" options={selectOptions} />
+      <SelectField disabled={isLoading} {...registerField("status")} id="status" options={selectOptions} />
     </div>
   );
 }
