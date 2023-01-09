@@ -2,7 +2,6 @@ import type { ILoginCredentials, ISignupCredentials, IUserResponse } from "types
 
 import { createContext, useContext } from "react";
 
-import { logger } from "services/shared/logger-service";
 import { useStatus } from "hooks/useStatus";
 import { useAuthService } from "hooks/useAuthService";
 import { useAccountService } from "hooks/useAccountService";
@@ -58,7 +57,6 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       await handleLogin({ login: data.email, password: data.password });
       setStatusSuccess();
     } catch (error) {
-      logger("error", "front", `AuthContextProvider.handleRegister error: ${error}`);
       setStatusError();
     }
   };
