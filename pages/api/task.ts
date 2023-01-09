@@ -58,7 +58,7 @@ const getTasks = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResp
 
   if (params?.finishPrevisionDateStart) {
     const inputDate = DateTime.fromISO(params?.finishPrevisionDateStart, { zone: "utc" });
-    query.finishPrevisionDate = { $gte: inputDate.toISO() };
+    query.finishPrevisionDate = { $gte: inputDate.toString() };
   }
 
   if (params?.finishPrevisionDateEnd) {
@@ -66,7 +66,7 @@ const getTasks = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResp
     if (!query.finishPrevisionDate) {
       query.finishPrevisionDate = {};
     }
-    query.finishPrevisionDate.$lte = lastDate.toISO();
+    query.finishPrevisionDate.$lte = lastDate.toString();
   }
 
   if (params?.status && params?.status != 0) {
@@ -94,7 +94,7 @@ const saveTask = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResp
       return res.status(400).json({ error: "Nome da tarefa invalida" });
     }
 
-    if (!task.finishPrevisionDate || DateTime.fromISO(task.finishPrevisionDate) < DateTime.now()) {
+    if (!task.finishPrevisionDate || DateTime.fromISO(task.finishPrevisionDate) < DateTime.now().toUTC()) {
       return res.status(400).json({ error: "Data de previsao invalida ou menor que hoje" });
     }
 
