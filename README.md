@@ -15,6 +15,10 @@
   <a href="#wave-autor">Autor</a>&nbsp;&nbsp;&nbsp;
 </p>
 
+---
+
+<br />
+
 ## :page_facing_up: Sobre
 
 O FIAP Tarefas é um trabalho de conclusão do módulo **Front End Engineering** do curso **MBA em Engenharia de Software** da FIAP.
@@ -35,8 +39,6 @@ O objetivo do projeto é, seguindo um protótipo FIGMA, desenvolver uma aplicaç
 <br />
 
 ## :gear: Como configurar e executar
-
-<br />
 
 ### Pré-requisitos
 
@@ -98,7 +100,6 @@ yarn dev
 
 - Acesse http://localhost:3000
 
-<br/>
 <br/>
 <br/>
 
